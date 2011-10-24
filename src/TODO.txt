@@ -1,0 +1,24 @@
+##############################################
+###					 #####
+###	THE VOID			 #####
+###	PROJECT : lost-star		 #####
+###	0x7dc 'EDEN'			 #####
+###					 #####
+##############################################
+
+DEVELOPERS
+
+* MJ-me0-dmt (Designer)
+
+TODO*
+
+- Get proper ship handling 
+- Get crosshair to move with mouse ( basically fix up the whole gui system )
+- Get Scale correct
+- Make a starfield effect
+- Design a planet generator
+- Design a astroid generator
+
+- Get xyzView more accurate, So we can use it for scaling and Hpr checking."1:1" Though we have to redo the current scale!
+
+
