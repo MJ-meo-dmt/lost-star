@@ -85,24 +85,28 @@ class Galaxy(DirectObject):
     
     def __init__(self):
         
-        # Creating the Skybox
+        # Init skyBox. "aka spaceBox"
         self.skyBox=loader.loadModel("../resources/models/Skybox.egg") # The Skybox need a redo.
         self.skyBox.setScale(20,20,20) # Any size - No matter
         self.skyBox.setBin("background", 0);
         self.skyBox.setDepthWrite(False);
         self.skyBox.setCompass() # ?
         self.skyBox.setZ(render, 0)
-                
-        # Attach the Skybox to the Camera
+        
+        # Attach the Skybox to the base.camera.
         self.skyBox.reparentTo(base.camera)
         
         # Init Lights
-        spaceLightsObj = SpaceLights()
+        spaceLightsInit = SpaceLights()
         self.skyBox.setLightOff()
         
+        # Init Planet Creation
+        PlanetInit = Planets()
+        PlanetInit.planetSpawn()
         # Load Space Station Data
-        testSpaceStation = SpaceStationControl()
+        #testSpaceStation = SpaceStationControl()
 # END of Galaxy CLASS.
+
 
 # SpaceLights
 class SpaceLights:
@@ -129,16 +133,107 @@ class SpaceLights:
 # END of SpaceLights CLASS
 
 
-# EVERYTHING TO DO WITH SPACE STATIONS...
+# EVERYTHING TO DO WITH SPACE STATIONS. Here will be subclasses.
 class SpaceStationControl:
+    
+    def __init__(self):
         
-        def __init__(self):
-            
-            # test model 
-            self.Sstasion = loader.loadModel("../resources/models/SpaceStation.egg")
-            #self.sstasion.setScale(0, 0, 0)
-            self.Sstasion.setPos(0, 200, 0)
-            self.Sstasion.reparentTo(render)
+        # test model 
+        self.Sstasion = loader.loadModel("../resources/models/SpaceStation.egg")
+        #self.sstasion.setScale(0, 0, 0)
+        self.Sstasion.setPos(0, 200, 0)
+        self.Sstasion.reparentTo(render)
 # END of SpaceStationControl CLASS.
+
+
+# Planet control and creation.
+class Planets(Galaxy):
+    
+    def __init__(self):
+        
+        # Space scale " var "
+        self.galaxyScale = 0.5
+        self.orbitscale = 10
+
+    def planetSpawn(self):
+        
+        # Here is the code for the creation of the planets
+        
+        self.orbit_root_mercury = render.attachNewNode('orbit_root_mercury')
+        self.orbit_root_venus = render.attachNewNode('orbit_root_venus')
+        self.orbit_root_mars = render.attachNewNode('orbit_root_mars')
+        self.orbit_root_earth = render.attachNewNode('orbit_root_earth')
+
+        self.orbit_root_moon = (self.orbit_root_earth.attachNewNode('orbit_root_moon'))
+
+        self.sun = loader.loadModel("../resources/models/planet_sphere")
+        self.sun_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/sun_1k_tex.jpg")
+        self.sun.setTexture(self.sun_tex, 1)
+        self.sun.reparentTo(render)
+        self.sun.setScale(2 * self.galaxyScale)
+
+        self.mercury = loader.loadModel("../resources/models/planet_sphere")
+        self.mercury_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/mercury_1k_tex.jpg")
+        self.mercury.setTexture(self.mercury_tex, 1)
+        self.mercury.reparentTo(self.orbit_root_mercury)
+        self.mercury.setPos( 0.38 * self.orbitscale, 0, 0)
+        self.mercury.setScale(0.385 * self.galaxyScale)
+
+        self.venus = loader.loadModel("../resources/models/planet_sphere")
+        self.venus_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/venus_1k_tex.jpg")
+        self.venus.setTexture(self.venus_tex, 1)
+        self.venus.reparentTo(self.orbit_root_venus)
+        self.venus.setPos( 0.72 * self.orbitscale, 0, 0)
+        self.venus.setScale(0.923 * self.galaxyScale)
+
+        self.mars = loader.loadModel("../resources/models/planet_sphere")
+        self.mars_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/mars_1k_tex.jpg")
+        self.mars.setTexture(self.mars_tex, 1)
+        self.mars.reparentTo(self.orbit_root_mars)
+        self.mars.setPos( 1.52 * self.orbitscale, 0, 0)
+        self.mars.setScale(0.515 * self.galaxyScale)
+
+        self.earth = loader.loadModel("../resources/models/planet_sphere")
+        self.earth_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/earth_1k_tex.jpg")
+        self.earth.setTexture(self.earth_tex, 1)
+        self.earth.reparentTo(self.orbit_root_earth)
+        self.earth.setScale(self.galaxyScale)
+        self.earth.setPos( self.orbitscale, 0, 0)
+
+        self.orbit_root_moon.setPos( self.orbitscale, 0, 0)
+
+        self.moon = loader.loadModel("../resources/models/planet_sphere")
+        self.moon_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/moon_1k_tex.jpg")
+        self.moon.setTexture(self.moon_tex, 1)
+        self.moon.reparentTo(self.orbit_root_moon)
+        self.moon.setScale(0.1 * self.galaxyScale)
+        self.moon.setPos(0.1 * self.orbitscale, 0, 0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

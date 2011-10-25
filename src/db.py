@@ -69,7 +69,6 @@ import MySQLdb
 ########## CODE ###########
 ##########################
 
-
 db = MySQLdb.connect(host="localhost", user="root", passwd="martin66", db="rpg")
 c = db.cursor()
 

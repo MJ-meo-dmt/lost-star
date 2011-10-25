@@ -12,7 +12,9 @@
 
 # 	* MJ-me0-dmt  -  
 # 
-
+# NOTES !!
+# I adjusted the gui text acording to my screen size on the laptop.
+# 
 #-->
 
 # License
@@ -81,12 +83,15 @@ from panda3d.core import *
 
 mainModelNode = render.attachNewNode('mNode')
 
-# Here take the model that the user load from console
+# This is for the demo Model.
 testModel = "./models/basicShip.egg"
+
+# Here we take the model "name" the user enter.
 #model = sys.argv[1]
 m = loader.loadModel(testModel)
 m.reparentTo(mainModelNode)
-m.setPos(0, 0, 0)
+m.setPos(0, 0, 0) 
+m.setScale(0.2, 0.2, 0.2) # Adjust Scale HERE -> For model
 
 
 # Loading the plane_ground
@@ -101,7 +106,8 @@ def printText(name, message, color):
     x,y,z = color # break apart the color tuple
     text.setTextColor(x,y,z, 1) # Set the text color from the color tuple
     text3d = NodePath(text) # Here we create a NodePath from the TextNode, so that we can manipulate it 'in world'
-    text3d.reparentTo(m) # So that its centred on the object
+    text3d.reparentTo(render) # So that its centred on the object
+    
     text3d.setScale(1.5, 1.5, 1.5) # Adjust the size of the axis xyz
     
     return text3d # return the NodePath for further use
