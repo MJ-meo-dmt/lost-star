@@ -84,14 +84,14 @@ from panda3d.core import *
 mainModelNode = render.attachNewNode('mNode')
 
 # This is for the demo Model.
-testModel = "./models/basicShip.egg"
+testModel = "./models/scout_Ship.egg"
 
 # Here we take the model "name" the user enter.
 #model = sys.argv[1]
 m = loader.loadModel(testModel)
 m.reparentTo(mainModelNode)
 m.setPos(0, 0, 0) 
-m.setScale(0.2, 0.2, 0.2) # Adjust Scale HERE -> For model
+#m.setScale(0.2, 0.2, 0.2) # Adjust Scale HERE -> For model
 
 
 # Loading the plane_ground

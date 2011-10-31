@@ -76,7 +76,7 @@ import random, sys, os, math
 ########## CODE ###########
 ##########################
 
-class guiControl(DirectObject):
+class Gui(DirectObject):
     
     def genLabelText(self, text, i):
             return OnscreenText(text = text, pos = (-1.3, .95-.05*i), fg=(1,1,1,1),
@@ -100,7 +100,7 @@ class guiControl(DirectObject):
         self.title = OnscreenText(text="Project: lost-star  v0.01 - 'Alpha'",
                               style=1, fg=(1,1,1,1),
                               pos=(-0.8,-0.95), scale = .07)
-        self.testText = self.genLabelText("Hello", 0)
+        self.testText = self.genLabelText("The Void", 0)
         
 
 

@@ -75,6 +75,8 @@ import random, sys, os, math
 # Game Imports
 #
 from Galaxy import Galaxy
+from Player import Player
+from Gui import Gui
 
 
 ###########################
@@ -89,14 +91,19 @@ class Main(DirectObject):
 		# Random check test.
         print "Test Hello"
         
+        # Just for now..
+        base.camLens.setNear(0.05)
+        base.camLens.setFar(1000000)
+        base.camLens.setFov(90)
         # Filters
         #render.setAntialias(AntialiasAttrib.MAuto)
-        
-        
-        
+### END OF MAIN CLASS
 
-# CLASS
+# CLASS CALLS (INIT)
 GameMain = Main()
 init_Galaxy = Galaxy()
+init_Gui = Gui()
+init_PlayerControl = Player()
+
 
 run()

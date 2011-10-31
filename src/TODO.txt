@@ -22,7 +22,7 @@ TODO*
 - Add physics
 - Setup Collisions
 - Get Planets to rotate around Sun (real-time effect)
-- Design a planet generator ( This deppend on the way we want to make planets. 
+- Design a planet generator ( This deppend on the way we want to make planets.) 
   We could go for normal looks or we could go for procedural planet generation with nice detail... but yea thats another story.
 - Design a astroid generator
 

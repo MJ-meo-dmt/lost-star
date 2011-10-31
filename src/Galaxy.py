@@ -60,6 +60,7 @@ from panda3d.core import Point3,Vec3,Vec4,BitMask32
 from panda3d.core import LightRampAttrib
 from panda3d.core import ColorBlendAttrib
 from panda3d.core import Filename,Buffer,Shader
+
 # TASK
 from direct.task import Task
 # PANDAC
@@ -88,8 +89,8 @@ class Galaxy(DirectObject):
         # Init skyBox. "aka spaceBox"
         self.skyBox=loader.loadModel("../resources/models/Skybox.egg") # The Skybox need a redo.
         self.skyBox.setScale(20,20,20) # Any size - No matter
-        self.skyBox.setBin("background", 0);
-        self.skyBox.setDepthWrite(False);
+        self.skyBox.setBin("background", 0)
+        self.skyBox.setDepthTest(False)
         self.skyBox.setCompass() # ?
         self.skyBox.setZ(render, 0)
         
@@ -103,6 +104,7 @@ class Galaxy(DirectObject):
         # Init Planet Creation
         PlanetInit = Planets()
         PlanetInit.planetSpawn()
+        
         # Load Space Station Data
         #testSpaceStation = SpaceStationControl()
 # END of Galaxy CLASS.
@@ -151,9 +153,9 @@ class Planets(Galaxy):
     
     def __init__(self):
         
-        # Space scale " var "
-        self.galaxyScale = 0.5
-        self.orbitscale = 10
+        # Space scale " var " 
+        self.galaxyScale = 100.0 # Global scale for size
+        self.orbitscale = 10000 # AU - To exact scale
 
     def planetSpawn(self):
         
@@ -166,34 +168,38 @@ class Planets(Galaxy):
 
         self.orbit_root_moon = (self.orbit_root_earth.attachNewNode('orbit_root_moon'))
 
-        self.sun = loader.loadModel("../resources/models/planet_sphere")
+        # Generic Planet load
+        self.genericPlanet = "../resources/models/planet_sphere.egg"
+        
+        
+        self.sun = loader.loadModel(self.genericPlanet)
         self.sun_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/sun_1k_tex.jpg")
         self.sun.setTexture(self.sun_tex, 1)
         self.sun.reparentTo(render)
-        self.sun.setScale(2 * self.galaxyScale)
+        self.sun.setScale(4 * self.galaxyScale)
 
-        self.mercury = loader.loadModel("../resources/models/planet_sphere")
+        self.mercury = loader.loadModel(self.genericPlanet)
         self.mercury_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/mercury_1k_tex.jpg")
         self.mercury.setTexture(self.mercury_tex, 1)
         self.mercury.reparentTo(self.orbit_root_mercury)
         self.mercury.setPos( 0.38 * self.orbitscale, 0, 0)
         self.mercury.setScale(0.385 * self.galaxyScale)
 
-        self.venus = loader.loadModel("../resources/models/planet_sphere")
+        self.venus = loader.loadModel(self.genericPlanet)
         self.venus_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/venus_1k_tex.jpg")
         self.venus.setTexture(self.venus_tex, 1)
         self.venus.reparentTo(self.orbit_root_venus)
         self.venus.setPos( 0.72 * self.orbitscale, 0, 0)
         self.venus.setScale(0.923 * self.galaxyScale)
 
-        self.mars = loader.loadModel("../resources/models/planet_sphere")
+        self.mars = loader.loadModel(self.genericPlanet)
         self.mars_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/mars_1k_tex.jpg")
         self.mars.setTexture(self.mars_tex, 1)
         self.mars.reparentTo(self.orbit_root_mars)
         self.mars.setPos( 1.52 * self.orbitscale, 0, 0)
         self.mars.setScale(0.515 * self.galaxyScale)
 
-        self.earth = loader.loadModel("../resources/models/planet_sphere")
+        self.earth = loader.loadModel(self.genericPlanet)
         self.earth_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/earth_1k_tex.jpg")
         self.earth.setTexture(self.earth_tex, 1)
         self.earth.reparentTo(self.orbit_root_earth)
@@ -202,7 +208,7 @@ class Planets(Galaxy):
 
         self.orbit_root_moon.setPos( self.orbitscale, 0, 0)
 
-        self.moon = loader.loadModel("../resources/models/planet_sphere")
+        self.moon = loader.loadModel(self.genericPlanet)
         self.moon_tex = loader.loadTexture("../resources/models/textures/planets/lowRes/moon_1k_tex.jpg")
         self.moon.setTexture(self.moon_tex, 1)
         self.moon.reparentTo(self.orbit_root_moon)

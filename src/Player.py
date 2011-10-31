@@ -75,7 +75,7 @@ import random, sys, os, math
 
 ##
 # Game Imports
-#
+from Galaxy import Planets
 
 
 ###########################
@@ -85,10 +85,15 @@ import random, sys, os, math
 class Player(DirectObject):
     
     def __init__(self):
-        pass
+        
+        PlayerControlInit = PlayerControl()
+        
+        
         # RACE EXTRA STATS COULD GO HERE 
         
 ### END OF Player CLASS.
+
+# Factions class with stats and so on.
 class Factions:
     
     def raceName(self):
@@ -102,44 +107,27 @@ class Factions:
         
     def raceRegion(self):
         pass 
-        
-        
-class PlayerSelect(Factions):
-    
-    def __init__(self):
-        # RUn
-        loadPlayerModel()
-        
-    def loadPlayerModel(self):
-        
-        # LOADING PLAYER MODEL --- THIS WILL GO INTO A PLAYERSELECT CLASS 
-        self.root_playerShip = render.attachNewNode('playerShip')
-        
-        self.playerShip = Actor("../models/basicShip.egg")
-        self.playerShip.reparentTo(self.root_playerShip)
-### END OF PlayerSelect CLASS.
-
-
+### END of Factions CLASS
 
 
 # PlayerControl CLASS: KB, MOUSE, CAMERA
-class PlayerControl(PlayerSelect):
+class PlayerControl(DirectObject, Planets):
     # Speed var for PlayerControl
-    SPEED = 1.0
+    SPEED = 8.0
     
-    def genLabelText(self, text, i):
-            return OnscreenText(text = text, pos = (-1.3, .95-.05*i), fg=(1,1,1,1),
-                                align = TextNode.ALeft, scale = .05, mayChange = 1)
-                                
     def __init__(self):
+        
+        # This "VAR" is from Planets() --> GLOBAL SCALE VAR
+        self.galaxyScale = Planets().galaxyScale
         
         self.controlMap = {"left":0, "right":0, "forward":0, "backward":0,
             "zoom-in":0, "zoom-out":0, "wheel-in":0, "wheel-out":0}
         self.mousebtn = [0,0,0]
         base.win.setClearColor(Vec4(0,0,0,1))
+        self.loadPlayerModel()
         
         # Accept the control keys for movement and rotation
-
+        
         self.accept("escape", sys.exit)
         self.accept("w", self.setControl, ["forward",1])
         self.accept("a", self.setControl, ["left",1])
@@ -161,7 +149,6 @@ class PlayerControl(PlayerSelect):
         self.accept("page_down-up", self.setControl, ["zoom-out", 0])
 
         taskMgr.add(self.move,"moveTask")
-
         
         # Game state variables
         self.isMoving = False
@@ -172,17 +159,29 @@ class PlayerControl(PlayerSelect):
         base.camera.reparentTo(self.playerShip)
         # POV of camera
         # This value serve as a vertical offset.
-        self.cameraTargetHeight = 6.0
+        self.cameraTargetHeight = 0.05
         # How far should the camera be from Ship
-        self.cameraDistance = 30
+        self.cameraDistance = 0.005
         # Initialize the pitch of the camera
-        self.cameraPitch = 10
+        self.cameraPitch = 0.05
         # Disable basic mouse control.
         base.disableMouse()
         # The mouse moves rotates the camera so lets get rid of the cursor
         props = WindowProperties()
         props.setCursorHidden(True)
         base.win.requestProperties(props)
+        
+
+        # Player load
+    def loadPlayerModel(self):
+        
+        # LOADING PLAYER MODEL --- THIS WILL GO INTO A PLAYERSELECT CLASS 
+        self.root_playerShip = render.attachNewNode('playerShip')
+        self.playerShip = Actor("../resources/models/scout_Ship.egg")
+        self.playerShip.reparentTo(self.root_playerShip)
+        self.playerShip.setScale(0.01)
+        self.playerShip.setPos(10,10, 10)
+        
 
     #Records the state of the arrow keys
     def setControl(self, key, value):
@@ -193,13 +192,13 @@ class PlayerControl(PlayerSelect):
     # Also deals with grid checking and collision detection
     def move(self, task):
 
-        # save ralph's initial position so that we can restore it,
+        # save Players initial position so that we can restore it,
         # in case he falls off the map or runs into something.
 
         startpos = self.playerShip.getPos()
         
         # Player ship speed
-        shipSpeed = 120
+        shipSpeed = 1000
         
         # If a move-key is pressed, move ship in the specified direction.
         if (self.controlMap["forward"]!=0):
@@ -214,8 +213,8 @@ class PlayerControl(PlayerSelect):
         # If a zoom button is pressed, zoom in or out
         if (self.controlMap["wheel-in"]!=0):
             self.cameraDistance -= 0.1 * self.cameraDistance;
-            if (self.cameraDistance < 5):
-                self.cameraDistance = 5
+            if (self.cameraDistance < 0.01):
+                self.cameraDistance = 0.01
             self.controlMap["wheel-in"] = 0
         elif (self.controlMap["wheel-out"]!=0):
             self.cameraDistance += 0.1 * self.cameraDistance;
@@ -224,8 +223,8 @@ class PlayerControl(PlayerSelect):
             self.controlMap["wheel-out"] = 0
         if (self.controlMap["zoom-in"]!=0):
             self.cameraDistance -= globalClock.getDt() * self.cameraDistance;
-            if (self.cameraDistance < 5):
-                self.cameraDistance = 5
+            if (self.cameraDistance < 0.01):
+                self.cameraDistance = 0.01
         elif (self.controlMap["zoom-out"]!=0):
             self.cameraDistance += globalClock.getDt() * self.cameraDistance;
             if (self.cameraDistance > 250):
