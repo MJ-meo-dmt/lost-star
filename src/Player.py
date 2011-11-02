@@ -178,8 +178,11 @@ class PlayerControl(DirectObject, Planets):
         # Task for the Position display
         taskMgr.add(self.updatePosTask, "posTask")
         # Create the onscreen text to display the playerShip position.
-        self.playerPos = OnscreenText(pos = (0, 0),fg = (1,1,1,1), scale = 0.08, mayChange = True)
-        
+        self.testText = self.genLabelText("Location", 2)
+        self.playerPosX = self.genLabelText("", 3)
+        self.playerPosY = self.genLabelText("", 4)
+        self.playerPosZ = self.genLabelText("", 5)
+
         # Player load
     def loadPlayerModel(self):
         
@@ -192,9 +195,13 @@ class PlayerControl(DirectObject, Planets):
     
     # For the Player Ship Positioning display.
     def updatePosTask(self,task):
-        shipPos = self.playerShip.getPos()
-        if shipPos > 0.0:
-            self.playerPos.setText("GPS :"+str(shipPos))
+        shipPosX = self.playerShip.getX()
+        shipPosY = self.playerShip.getY()
+        shipPosZ = self.playerShip.getZ()
+        if shipPosX or shipPoxY > 0.0:
+            self.playerPosX.setText("X : "+str(shipPosX))
+            self.playerPosY.setText("Y : "+str(shipPosY))
+            self.playerPosZ.setText("Z : "+str(shipPosZ))
         return task.cont
         
     #Records the state of the arrow keys
