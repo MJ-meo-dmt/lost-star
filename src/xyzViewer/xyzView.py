@@ -57,7 +57,8 @@ import os
 
 # Config File
 from pandac.PandaModules import *
-loadPrcFileData("setup", """sync-video 0
+loadPrcFileData("setup", """
+sync-video 0
 #show-frame-rate-meter #t
 win-size 800 600
 #win-size 1024 768
@@ -76,7 +77,7 @@ fullscreen #f
 import direct.directbase.DirectStart
 
 from direct.gui.OnscreenText import OnscreenText
-from pandac.PandaModules import PandaNode,NodePath,Camera,TextNode
+
 from direct.gui.DirectGui import *
 from panda3d.core import *
 

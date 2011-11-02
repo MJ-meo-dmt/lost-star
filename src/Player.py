@@ -115,6 +115,10 @@ class PlayerControl(DirectObject, Planets):
     # Speed var for PlayerControl
     SPEED = 8.0
     
+    def genLabelText(self, text, i):
+            return OnscreenText(text = text, pos = (-1.3, .95-.05*i), fg=(1,1,1,1),
+                                align = TextNode.ALeft, scale = .05, mayChange = 1)
+    
     def __init__(self):
         
         # This "VAR" is from Planets() --> GLOBAL SCALE VAR
@@ -171,7 +175,11 @@ class PlayerControl(DirectObject, Planets):
         props.setCursorHidden(True)
         base.win.requestProperties(props)
         
-
+        # Task for the Position display
+        taskMgr.add(self.updatePosTask, "posTask")
+        # Create the onscreen text to display the playerShip position.
+        self.playerPos = OnscreenText(pos = (0, 0),fg = (1,1,1,1), scale = 0.08, mayChange = True)
+        
         # Player load
     def loadPlayerModel(self):
         
@@ -181,21 +189,27 @@ class PlayerControl(DirectObject, Planets):
         self.playerShip.reparentTo(self.root_playerShip)
         self.playerShip.setScale(0.01)
         self.playerShip.setPos(10,10, 10)
+    
+    # For the Player Ship Positioning display.
+    def updatePosTask(self,task):
+        shipPos = self.playerShip.getPos()
+        if shipPos > 0.0:
+            self.playerPos.setText("GPS :"+str(shipPos))
+        return task.cont
         
-
     #Records the state of the arrow keys
     def setControl(self, key, value):
         self.controlMap[key] = value
 
 
     # Accepts arrow keys to move either the player or the menu cursor,
-    # Also deals with grid checking and collision detection
+    
     def move(self, task):
 
         # save Players initial position so that we can restore it,
         # in case he falls off the map or runs into something.
 
-        startpos = self.playerShip.getPos()
+        
         
         # Player ship speed
         shipSpeed = 1000
@@ -273,5 +287,7 @@ class PlayerControl(DirectObject, Planets):
         viewTarget = Point3(0,0,self.cameraTargetHeight)
         base.camera.lookAt(viewTarget)
         
-        return task.cont 
+
+        return task.cont
+
 ### END OF PlayerControl CLASS.

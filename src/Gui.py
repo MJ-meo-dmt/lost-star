@@ -69,8 +69,8 @@ import random, sys, os, math
 
 ##
 # Game Imports
-#
-#from playerControl import playerControl
+
+from Player import PlayerControl
 
 ###########################
 ########## CODE ###########
@@ -102,5 +102,8 @@ class Gui(DirectObject):
                               pos=(-0.8,-0.95), scale = .07)
         self.testText = self.genLabelText("The Void", 0)
         
-
-
+        
+        
+        
+        
+        
