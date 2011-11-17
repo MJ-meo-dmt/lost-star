@@ -10,7 +10,7 @@
 # multiple aux-display lines to specify fallback modules.
 # When the module indicated by load-display fails, it will fall
 # back to the next display module indicated by aux-display,
-# when that fails, the next aux-display line, and so on.
+# when that fails, the next aux-display line, and so onn.
 
 load-display pandagl
 #load-display pandadx9
