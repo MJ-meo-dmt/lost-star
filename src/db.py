@@ -58,21 +58,38 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # EXTRA
 import random, sys, os, math
-import MySQLdb
+from sqlite3 import dbapi2 as sqlite
+
 ##
 # Game Imports
 #
-
 
 
 ###########################
 ########## CODE ###########
 ##########################
 
-db = MySQLdb.connect(host="localhost", user="root", passwd="martin66", db="rpg")
-c = db.cursor()
+# Connect to the DB 
+conn = sqlite.connect("db/rpg.db")
 
-name = "hunter"
-age = 12
+# Setup cursor for conn
+cur = conn.cursor()
 
-c.execute("""INSERT INTO player_data (player_names) VALUES ("Hunter")""")
+for row in cur:
+	print row
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

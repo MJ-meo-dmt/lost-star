@@ -46,6 +46,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #-->
 
+# Load Config File
+
+from panda3d.core import loadPrcFile
+ 
+loadPrcFile("../config/Config.prc")
+
+
 # Engine imports
 import direct.directbase.DirectStart
 # CORE
@@ -95,7 +102,13 @@ class Main(DirectObject):
         base.camLens.setNear(0.05)
         base.camLens.setFar(1000000)
         base.camLens.setFov(90)
-        # Filters
+        
+        # Filters working on supported VGA GPU's only
+        filters = CommonFilters(base.win, base.cam)
+        #filters.setBloom()
+        filters.setCartoonInk()
+        
+        
         #render.setAntialias(AntialiasAttrib.MAuto)
 ### END OF MAIN CLASS
 

@@ -87,11 +87,9 @@ class Player(DirectObject):
     def __init__(self):
         
         PlayerControlInit = PlayerControl()
-        
-        
         # RACE EXTRA STATS COULD GO HERE 
-        
 ### END OF Player CLASS.
+
 
 # Factions class with stats and so on.
 class Factions:
@@ -113,7 +111,7 @@ class Factions:
 # PlayerControl CLASS: KB, MOUSE, CAMERA
 class PlayerControl(DirectObject, Planets):
     # Speed var for PlayerControl
-    SPEED = 8.0
+    SPEED = 10.0
     
     def genLabelText(self, text, i):
             return OnscreenText(text = text, pos = (-1.3, .95-.05*i), fg=(1,1,1,1),
@@ -159,17 +157,21 @@ class PlayerControl(DirectObject, Planets):
 
         # Set up the camera
         # Adding the camera to Player ship
-        
         base.camera.reparentTo(self.playerShip)
+        
         # POV of camera
         # This value serve as a vertical offset.
         self.cameraTargetHeight = 0.05
+        
         # How far should the camera be from Ship
         self.cameraDistance = 0.005
+        
         # Initialize the pitch of the camera
         self.cameraPitch = 0.05
+        
         # Disable basic mouse control.
         base.disableMouse()
+        
         # The mouse moves rotates the camera so lets get rid of the cursor
         props = WindowProperties()
         props.setCursorHidden(True)
@@ -177,28 +179,32 @@ class PlayerControl(DirectObject, Planets):
         
         # Task for the Position display
         taskMgr.add(self.updatePosTask, "posTask")
+        
         # Create the onscreen text to display the playerShip position.
         self.testText = self.genLabelText("Location", 2)
-        self.playerPosX = self.genLabelText("", 3)
-        self.playerPosY = self.genLabelText("", 4)
-        self.playerPosZ = self.genLabelText("", 5)
+        self.playerPosX = self.genLabelText("X", 3)
+        self.playerPosY = self.genLabelText("Y", 4)
+        self.playerPosZ = self.genLabelText("Z", 5)
 
         # Player load
     def loadPlayerModel(self):
+        
+        """ Make a master scaling file for each ship, station, planets """
+        
         
         # LOADING PLAYER MODEL --- THIS WILL GO INTO A PLAYERSELECT CLASS 
         self.root_playerShip = render.attachNewNode('playerShip')
         self.playerShip = Actor("../resources/models/scout_Ship.egg")
         self.playerShip.reparentTo(self.root_playerShip)
-        self.playerShip.setScale(0.01)
-        self.playerShip.setPos(10,10, 10)
+        self.playerShip.setScale(0.001)
+        self.playerShip.setPos(0.0, 0.0, 0.0)
     
     # For the Player Ship Positioning display.
     def updatePosTask(self,task):
         shipPosX = self.playerShip.getX()
         shipPosY = self.playerShip.getY()
         shipPosZ = self.playerShip.getZ()
-        if shipPosX or shipPoxY > 0.0:
+        if shipPosX or shipPosY > 0.0:
             self.playerPosX.setText("X : "+str(shipPosX))
             self.playerPosY.setText("Y : "+str(shipPosY))
             self.playerPosZ.setText("Z : "+str(shipPosZ))
@@ -219,7 +225,7 @@ class PlayerControl(DirectObject, Planets):
         
         
         # Player ship speed
-        shipSpeed = 1000
+        shipSpeed = 80.0
         
         # If a move-key is pressed, move ship in the specified direction.
         if (self.controlMap["forward"]!=0):
@@ -296,5 +302,4 @@ class PlayerControl(DirectObject, Planets):
         
 
         return task.cont
-
 ### END OF PlayerControl CLASS.
