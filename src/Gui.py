@@ -69,13 +69,14 @@ import random, sys, os, math
 
 ##
 # Game Imports
-
 from Player import PlayerControl
+
 
 ###########################
 ########## CODE ###########
 ##########################
 
+# Main GUI Class
 class Gui(DirectObject):
     
     def genLabelText(self, text, i):
@@ -101,9 +102,4 @@ class Gui(DirectObject):
                               style=1, fg=(1,1,1,1),
                               pos=(-0.8,-0.95), scale = .07)
         self.testText = self.genLabelText("The Void", 0)
-        
-        
-        
-        
-        
-        
+### END OF Gui CLASS

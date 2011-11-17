@@ -75,17 +75,22 @@ fullscreen #f
 
 # Engine Imports
 import direct.directbase.DirectStart
-
+from direct.filter.CommonFilters import CommonFilters
+from panda3d.core import Filename,Buffer,Shader
 from direct.gui.OnscreenText import OnscreenText
 
 from direct.gui.DirectGui import *
 from panda3d.core import *
 
 
+filters = CommonFilters(base.win, base.cam)
+filterok = filters.setBloom(blend=(0,0,0,1), desat=-0.5, intensity=3.0, size="small")
+
+
 mainModelNode = render.attachNewNode('mNode')
 
 # This is for the demo Model.
-testModel = "./models/scout_Ship.egg"
+testModel = "./models/shipx.egg"
 
 # Here we take the model "name" the user enter.
 #model = sys.argv[1]
@@ -182,7 +187,7 @@ OnscreenText(text="- Use Mouse Right+Click to zoom In and Out", style=2,  fg=(1,
 # Create Light
 # lets add hdr lighting for fun
 render.setShaderAuto()
-#render.setAttrib(LightRampAttrib.makeHdr1())
+render.setAttrib(LightRampAttrib.makeHdr1())
 ambientLight = AmbientLight("ambientLight")
 # existing lighting is effectively darkened so boost ambient a bit
 ambientLight.setColor(Vec4(.4, .4, .4, 1))
@@ -198,6 +203,7 @@ mainModelNode = render.attachNewNode('mNode')
 # Camera Settings
 #base.camera.setPos(5,-30,5)
 base.camera.lookAt(m)
+filterok2 = filters.setCartoonInk()
 
 # Loop
 run()
