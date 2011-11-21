@@ -63,7 +63,7 @@ from sqlite3 import dbapi2 as sqlite
 ##
 # Game Imports
 #
-
+from config import *
 
 ###########################
 ########## CODE ###########
@@ -75,10 +75,25 @@ conn = sqlite.connect("db/rpg.db")
 # Setup cursor for conn
 cur = conn.cursor()
 
-for row in cur:
-	print row
+class dbMain:
+	
+	def __init__(self):
+		
+		# Connect to the DataBase.
+		self.conn = sqlite.connect(db_path)
+		
+		# Set the Cursor.
+		self.cur = self.conn.cursor()
+		
+		self.cur.execute("select * from planetData")
+		for row in self.cur:
+			
+			print "The first test: %s, %f" % (row[0], row[1])
+		
+		
+	
 
-
+dbMain()
 
 
 
