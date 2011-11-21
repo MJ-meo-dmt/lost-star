@@ -103,11 +103,12 @@ class Main(DirectObject):
         base.camLens.setFar(1000000)
         base.camLens.setFov(90)
         
+        render.setShaderAuto()
         # Filters working on supported VGA GPU's only
         filters = CommonFilters(base.win, base.cam)
         #filters.setBloom()
         filters.setCartoonInk()
-        
+        #
         
         #render.setAntialias(AntialiasAttrib.MAuto)
 ### END OF MAIN CLASS
