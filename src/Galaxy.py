@@ -88,7 +88,7 @@ class Galaxy(DirectObject):
         
         # Init skyBox. "aka spaceBox"
         self.skyBox=loader.loadModel("../resources/models/Skybox.egg") # The Skybox need a redo.
-        self.skyBox.setScale(20,20,20) # Any size - No matter
+        self.skyBox.setScale(1.0,1.0,1.0) # Any size - No matter
         self.skyBox.setBin("background", 0)
         self.skyBox.setDepthTest(False)
         self.skyBox.setCompass() # ?
@@ -115,9 +115,6 @@ class SpaceLights:
     
     def __init__(self):
         
-        # LIGHTS
-        # lets add hdr lighting for fun
-        render.setShaderAuto()
         #render.setAttrib(LightRampAttrib.makeHdr1())
         ambientLight = AmbientLight("ambientLight")
         # existing lighting is effectively darkened so boost ambient a bit
@@ -134,20 +131,6 @@ class SpaceLights:
         render.setLight(render.attachNewNode(directionalLight))
 # END OF SpaceLights CLASS
 
-
-# EVERYTHING TO DO WITH SPACE STATIONS. Here will be subclasses.
-class SpaceStationControl:
-    
-    def __init__(self):
-        
-        # test model 
-        self.Sstasion = loader.loadModel("../resources/models/SpaceStation.egg")
-        #self.sstasion.setScale(0, 0, 0)
-        self.Sstasion.setPos(0, 200, 0)
-        self.Sstasion.reparentTo(render)
-# END OF SpaceStationControl CLASS.
-
-
 # Planet control and creation.
 class Planets(Galaxy):
     
@@ -161,18 +144,31 @@ class Planets(Galaxy):
     def planetSpawn(self):
         
         # Here is the code for the creation of the planets
-        
+       
         self.orbit_root_testPlanet = render.attachNewNode('orbit_root_testPlanet')
         
         xyzSum = 0.0020 * self.galaxyScale
         
         self.testPlanet = loader.loadModel("../resources/models/p_Earth2.egg")
+        
         self.testPlanet.reparentTo(self.orbit_root_testPlanet)
         self.testPlanet.setScale(xyzSum, xyzSum, xyzSum)
         self.testPlanet.setPos(0.15000,0.15000,0)
     
 ### END OF Planets CLASS
 
+# EVERYTHING TO DO WITH SPACE STATIONS. Here will be subclasses.
+class SpaceStationControl:
+    
+    def __init__(self):
+        
+        
+        # test model 
+        self.Sstasion = loader.loadModel("../resources/models/SpaceStation.egg")
+        #self.sstasion.setScale(0,0,0)
+        self.Sstasion.setPos(0.14000,0.14000,0.0010)
+        self.Sstasion.reparentTo(render)
+# END OF SpaceStationControl CLASS.
 
 
 
