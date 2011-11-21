@@ -164,10 +164,10 @@ class PlayerControl(DirectObject, Planets):
         self.cameraTargetHeight = 0.05
         
         # How far should the camera be from Ship
-        self.cameraDistance = 0.005
+        self.cameraDistance = 0.08
         
         # Initialize the pitch of the camera
-        self.cameraPitch = 0.05
+        self.cameraPitch = 0.04
         
         # Disable basic mouse control.
         base.disableMouse()
@@ -191,19 +191,24 @@ class PlayerControl(DirectObject, Planets):
         
         """ Make a master scaling file for each ship, station, planets """
         
+        #self.myShader = Shader.load(Shader.SLCg, "toonV.sha", "toonF.sha")
         
         # LOADING PLAYER MODEL --- THIS WILL GO INTO A PLAYERSELECT CLASS 
         self.root_playerShip = render.attachNewNode('playerShip')
         self.playerShip = Actor("../resources/models/scout_Ship.egg")
-        self.playerShip.reparentTo(self.root_playerShip)
         self.playerShip.setScale(0.001)
         self.playerShip.setPos(0.0, 0.0, 0.0)
-    
+        #self.playerShip.setShaderInput("tint", Vec4(1.0, 0.5, 0.5, 1.0))
+        #self.playerShip.setShader(self.myShader)
+        self.playerShip.reparentTo(self.root_playerShip)
+        
+        
     # For the Player Ship Positioning display.
     def updatePosTask(self,task):
         shipPosX = self.playerShip.getX()
         shipPosY = self.playerShip.getY()
         shipPosZ = self.playerShip.getZ()
+        
         if shipPosX or shipPosY > 0.0:
             self.playerPosX.setText("X : "+str(shipPosX))
             self.playerPosY.setText("Y : "+str(shipPosY))
