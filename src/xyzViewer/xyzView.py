@@ -82,28 +82,46 @@ from direct.gui.OnscreenText import OnscreenText
 from direct.gui.DirectGui import *
 from panda3d.core import *
 
+#
+base.setBackgroundColor(0,0,0,0)
 
 filters = CommonFilters(base.win, base.cam)
 filterok = filters.setBloom(blend=(0,0,0,1), desat=-0.5, intensity=3.0, size="small")
 
 
-mainModelNode = render.attachNewNode('mNode')
+orbit_root_mercury = render.attachNewNode('orbit_root_mercury')
+orbit_root_venus = render.attachNewNode('orbit_root_venus')
+orbit_root_mars = render.attachNewNode('orbit_root_mars')
+orbit_root_earth = render.attachNewNode('orbit_root_earth')
 
 # This is for the demo Model.
-testModel = "./models/shipx.egg"
+testModel = "./models/planet_sphere.egg"
 
 # Here we take the model "name" the user enter.
-#model = sys.argv[1]
-m = loader.loadModel(testModel)
-m.reparentTo(mainModelNode)
-m.setPos(0, 0, 0) 
-#m.setScale(0.2, 0.2, 0.2) # Adjust Scale HERE -> For model
 
+sun = loader.loadModel("models/planet_sphere")
+sun.reparentTo(render)
+sun.setScale(2)
+
+mercury = loader.loadModel("models/planet_sphere")
+mercury.reparentTo(orbit_root_mercury)
+mercury.setPos(7.6 * 30.0,0,0)
+mercury.setScale(1.0)
+
+venus = loader.loadModel("models/planet_sphere")
+venus.reparentTo(orbit_root_venus)
+venus.setPos(14.2 * 30.0,0,0)
+venus.setScale(2.6)
+
+mars = loader.loadModel("models/planet_sphere")
+mars.reparentTo(orbit_root_mars)
+mars.setPos(19.7 * 30.0,0,0)
+mars.setScale(30)
 
 # Loading the plane_ground
-plane = loader.loadModel("./models/xyzViewPlane.egg")
-plane.reparentTo(render)
-plane.setPos(0,0,-52)
+#plane = loader.loadModel("./models/xyzViewPlane.egg")
+#plane.reparentTo(render)
+#plane.setPos(0,0,-52)
 
     
 def printText(name, message, color): 
@@ -156,11 +174,11 @@ printText("YL", "Z", (0,0,0)).setPos(-1.5,0,-51)
 # It is restricted to 2D
 
 # Gather Data for INFO: Outputs
-mScale = str(m.getScale()) # Get main object scale
-mPos = str(m.getPos()) # Get main object Position
-mGeo = SceneGraphAnalyzer()# Geo data output * need Fix!!
+#mScale = str(m.getScale()) # Get main object scale
+#mPos = str(m.getPos()) # Get main object Position
+#mGeo = SceneGraphAnalyzer()# Geo data output * need Fix!!
 print "----------------------------"
-print "SceneGraph output : \n",mGeo
+#print "SceneGraph output : \n",mGeo
 print "----------------------------"
 
 # TITLE
@@ -168,8 +186,8 @@ OnscreenText(text="xyzView - The Void Scaling System", style=2,  fg=(1,1,1,1), p
 OnscreenText(text="INFO :", style=2,  fg=(1,1,1,1), pos=(-1.6,0.9), scale = .06)
 
 # INFO
-OnscreenText(text="- Object Scale : %s" % mScale, style=2,  fg=(1,1,1,1), pos=(-1.35,0.84), scale = .052)
-OnscreenText(text="- Object Pos : %s" % mPos, style=2,  fg=(1,1,1,1), pos=(-1.35,0.78), scale = .052)
+#OnscreenText(text="- Object Scale : %s" % mScale, style=2,  fg=(1,1,1,1), pos=(-1.35,0.84), scale = .052)
+#OnscreenText(text="- Object Pos : %s" % mPos, style=2,  fg=(1,1,1,1), pos=(-1.35,0.78), scale = .052)
 # NOTES
 OnscreenText(text="Notes:", style=2,  fg=(1,1,1,1), pos=(-1.6,-0.6), scale = .05)
 OnscreenText(text="- Dash represents 1 unit", style=2,  fg=(1,1,1,1), pos=(-1.4,-0.65), scale = .05)
@@ -190,7 +208,7 @@ render.setShaderAuto()
 render.setAttrib(LightRampAttrib.makeHdr1())
 ambientLight = AmbientLight("ambientLight")
 # existing lighting is effectively darkened so boost ambient a bit
-ambientLight.setColor(Vec4(.4, .4, .4, 1))
+ambientLight.setColor(Vec4(0.4, 0.4, 0.4, 1))
 directionalLight = DirectionalLight("directionalLight")
 directionalLight.setDirection(Vec3(-5, -5, -5))
 # hdr can handle any amount of lighting
@@ -202,7 +220,7 @@ render.setLight(render.attachNewNode(directionalLight))
 mainModelNode = render.attachNewNode('mNode')
 # Camera Settings
 #base.camera.setPos(5,-30,5)
-base.camera.lookAt(m)
+#base.camera.lookAt(m)
 filterok2 = filters.setCartoonInk()
 
 # Loop
