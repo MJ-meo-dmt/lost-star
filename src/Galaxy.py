@@ -76,6 +76,8 @@ import random, sys, os, math
 ##
 # Game Imports
 #
+from db import *
+from config import *
 
 
 ###########################
@@ -85,6 +87,14 @@ import random, sys, os, math
 class Galaxy(DirectObject):
     
     def __init__(self):
+        # Print Init.
+        print ""
+        print "#####################################"
+        print "--  GALAXY LOADED --"
+        print ""
+        
+        # DB Testing
+        
         
         # Init skyBox. "aka spaceBox"
         self.skyBox=loader.loadModel("../resources/models/Skybox.egg") # The Skybox need a redo.
@@ -93,6 +103,7 @@ class Galaxy(DirectObject):
         self.skyBox.setDepthTest(False)
         self.skyBox.setCompass() # ?
         self.skyBox.setZ(render, 0)
+        print "+ Space Loaded..."
         
         # Attach the Skybox to the base.camera.
         self.skyBox.reparentTo(base.camera)
@@ -102,15 +113,21 @@ class Galaxy(DirectObject):
         self.skyBox.setLightOff()
         
         # Init Planet Creation
-        PlanetInit = Planets()
-        PlanetInit.planetSpawn()
+        self.PlanetInit = Planets()
+        self.PlanetInit.earthPlanet()
         
         #Load Space Station Data
         #testSpaceStation = SpaceStationControl()
+        
+        
+        
+        
+        
 # END OF Galaxy CLASS.
 
 
 # SpaceLights
+# Everything todo with lights in space.#
 class SpaceLights:
     
     def __init__(self):
@@ -132,7 +149,7 @@ class SpaceLights:
 # END OF SpaceLights CLASS
 
 # Planet control and creation.
-class Planets(Galaxy):
+class Planets:
     
     def __init__(self):
         
@@ -140,18 +157,32 @@ class Planets(Galaxy):
         self.galaxyScale = 4 # Global var for scaling, mainly Planets, Stars...
         self.galaxyDistance = 0.100
         
-
-    def planetSpawn(self):
+        
+    def earthPlanet(self):
         
         # Here is the code for the creation of the planets
-       
+        DB = dbMain()
+        
+        
+        self.orbit_root_testPlanet2 = render.attachNewNode('orbit_root_testPlanet2')
+        
+        xyzSum = 0.0088 * self.galaxyScale
+        
+        self.testPlanet2 = loader.loadModel("../resources/models/p_Earth2.egg")
+        
+        self.testPlanet2.reparentTo(self.orbit_root_testPlanet2)
+        self.testPlanet2.setScale(xyzSum)
+        self.testPlanet2.setPos(0.48300,0.15400,0)
+        
+        ###
+        
         self.orbit_root_testPlanet = render.attachNewNode('orbit_root_testPlanet')
         
-        xyzSum = 0.0020 * self.galaxyScale
+        xyzSum = 0.0012 * self.galaxyScale
         
         self.testPlanet = loader.loadModel("../resources/models/p_Earth2.egg")
         
-        self.testPlanet.reparentTo(self.orbit_root_testPlanet)
+        self.testPlanet.reparentTo(self.orbit_root_testPlanet2)
         self.testPlanet.setScale(xyzSum, xyzSum, xyzSum)
         self.testPlanet.setPos(0.15000,0.15000,0)
     
