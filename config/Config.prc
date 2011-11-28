@@ -73,7 +73,7 @@ want-tk           #f
 
 # Enable/disable performance profiling tool and frame-rate meter
 
-want-pstats            #f
+want-pstats            #t
 show-frame-rate-meter  #t
 
 # Enable audio using the OpenAL audio library by default:
@@ -98,4 +98,4 @@ model-cache-textures #f
 # seem to be most reliable. Setting it to #f makes Panda use
 # the latest profile available.
 
-basic-shaders-only #t
+basic-shaders-only #f
