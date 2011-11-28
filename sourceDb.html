@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Project: -lost star-</title>
+
+<!-- MASTER CSS FILE -->
+<link href="master.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body id="body">
+
+		<div id="headLogo">
+			<h1>The Void</h1>
+				<h2>Project: lost-star</h2>		
+		</div>
+		<div id="BodyMenu">
+		<h1>Index</h1>
+		<ul>
+			<a href="index.html" ><li>Home</li></a>		
+			<a href="dev.html" ><li>Development</li></a>
+			<a href="source.html" ><li>Source Help</li></a>
+		</ul>
+		</div>
+		
+		<div id="BodyTop">
+			<h2>Source Doc</h2>	
+			<h3>Module List</h3>
+			<ul>
+				<a href="sourceMain.html" ><li>Main.py</li></a>
+				<a href="sourceGalaxy.html" ><li>Galaxy.py</li></a>
+				<a href="sourcePlayer.html" ><li>Player.py</li></a>
+				<a href="sourceDb.html" ><li>db.py</li></a>
+				<a href="sourceGui.html" ><li>Gui.py</li></a>
+				<a href="sourceConfig.html" ><li>config.py</li></a>
+				
+			</ul>
+			
+		</div>
+		
+		
+		<div id="BodyMid">
+			<h2>db.py</h2>			
+			<p id="pCode">Handles everything for the db sql requests.</p>
+			
+			<p id="BodyMidCode" style="color:red;">Classes<br><br>
+			<code>
+				<font id="codeClass">class</font> dbMain: 
+				<font id="codeCom"># This is the main db class.</font><br>
+				<font id="codeDocs">* All other db related things will go under this class.</font>
+			</code></p>
+			<br />
+			
+			<p id="BodyMidCode" style="color:blue;">Methods<br>
+			
+			<code><br>
+				<font id="codeDef">def</font> __init__(self, PID, COL):
+				<font id="codeCom"># None yet</font><br>
+				<font id="codeDocs">* Not in use.</font>				
+				<br>
+				<br>
+				<font id="codeDef">def</font> getPlanetData(self, PID, COL):
+				<font id="codeCom"># Get data from Database</font><br>
+				<font id="codeDocs">* Returns the value requested by the params, PID + COL<br>
+            PID = PlanetID. (<font id="codeVar">int value</font>)# From sql planetID<br>
+            COL = Column Name in db. (<font id="codeVar">str value</font>) # Column from sql planetData</font>
+			</code>
+			</p>
+		<p>Notes:</p>
+		</div>
+		
+		
+
+
+
+
+
+		
+		
+</body>
+</html>
