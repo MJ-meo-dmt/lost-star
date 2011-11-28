@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* MAIN CONTENT */
+
+#body {
+
+	background-color: #dcdbd7;
+	text-align: left;
+	}
+
+#headLogo {
+	
+	text-align: center;
+	font-size: large;
+	color: black;
+	border-color: black;
+	border-style: solid;
+	border-width: 2px;
+	
+	
+}
+
+#BodyMenu {
+	background-color: gray;
+	margin-left: 10px;
+	margin-right: 35px;
+	margin-top: 30px;
+	margin-bottom: 1000px;
+	padding-top: 1px;	
+	padding-left: 10px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+
+	text-align: left;
+	font-size: medium;
+	color: black;
+	float: left;
+
+}
+
+#BodyTop {
+	margin-top: 80px;
+
+}
+
+#BodyMid {
+	margin-top: 20px;
+	text-align: left;
+
+}
+#BodyMidCode { 
+	background-color: #b6b6b6;
+	margin-left: 240px;
+	margin-right: 320px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+
+/* Code style: Python */
+code {
+	font-size: large;
+	margin-left: 20px;
+	color: black;
+
+}
+#pCode {
+	text-align: center;
+	background-color: #04e504;
+	margin-left: 260px;
+	margin-right: 340px;
+	
+}
+
+/* Comments */
+#codeCom {
+	color: green;
+}
+
+#codeDocs {
+	color: #7b0000;
+	font-size: small;
+}
+/* Python Name Highlights */
+
+#codeClass {
+	color: red;
+}
+#codeDef {
+	color: blue;
+}
+#codeVar {
+	color: blue;
+	}
+/* MAIN CONTENT END */
