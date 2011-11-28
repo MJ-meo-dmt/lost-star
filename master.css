@@ -17,6 +17,10 @@
 	border-color: black;
 	border-style: solid;
 	border-width: 2px;
+	margin-left: 300px;
+	margin-right: 350px;
+	background-position: center center;
+	
 	
 	
 }
@@ -41,7 +45,10 @@
 
 #BodyTop {
 	margin-top: 80px;
-
+	margin-left: 200px;
+	margin-right: 250px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 #BodyMid {
@@ -95,5 +102,9 @@ code {
 }
 #codeVar {
 	color: blue;
-	}
+	
+}
+
+/* IMAGES */
+
 /* MAIN CONTENT END */
