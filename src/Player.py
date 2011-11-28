@@ -85,6 +85,11 @@ from Galaxy import Planets
 class Player(DirectObject):
     
     def __init__(self):
+        # Print Init.
+        print ""
+        print "#####################################"
+        print "--  PLAYER LOADED --"
+        print ""
         
         PlayerControlInit = PlayerControl()
         # RACE EXTRA STATS COULD GO HERE 
@@ -209,10 +214,10 @@ class PlayerControl(DirectObject, Planets):
         shipPosY = self.playerShip.getY()
         shipPosZ = self.playerShip.getZ()
         
-        if shipPosX or shipPosY > 0.0:
-            self.playerPosX.setText("X : "+str(shipPosX))
-            self.playerPosY.setText("Y : "+str(shipPosY))
-            self.playerPosZ.setText("Z : "+str(shipPosZ))
+        if shipPosX or shipPosY or shipPosZ > 0.0:
+            self.playerPosX.setText("X : "+str(shipPosX)[:8])
+            self.playerPosY.setText("Y : "+str(shipPosY)[:8])
+            self.playerPosZ.setText("Z : "+str(shipPosY)[:8])
         return task.cont
         
     #Records the state of the arrow keys
