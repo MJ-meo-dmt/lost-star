@@ -69,7 +69,7 @@ import random, sys, os, math
 
 ##
 # Game Imports
-from Player import PlayerControl
+
 
 
 ###########################
@@ -78,6 +78,12 @@ from Player import PlayerControl
 
 # Main GUI Class
 class Gui(DirectObject):
+    
+    # Print Init.
+    print ""
+    print "#####################################"
+    print "--  GUI LOADED --"
+    print ""
     
     def genLabelText(self, text, i):
             return OnscreenText(text = text, pos = (-1.3, .95-.05*i), fg=(1,1,1,1),
