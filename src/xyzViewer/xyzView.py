@@ -89,10 +89,8 @@ filters = CommonFilters(base.win, base.cam)
 filterok = filters.setBloom(blend=(0,0,0,1), desat=-0.5, intensity=3.0, size="small")
 
 
-orbit_root_mercury = render.attachNewNode('orbit_root_mercury')
-orbit_root_venus = render.attachNewNode('orbit_root_venus')
-orbit_root_mars = render.attachNewNode('orbit_root_mars')
-orbit_root_earth = render.attachNewNode('orbit_root_earth')
+solarSystem1 = render.attachNewNode('solarSystem1')
+
 
 # This is for the demo Model.
 testModel = "./models/planet_sphere.egg"
@@ -100,23 +98,23 @@ testModel = "./models/planet_sphere.egg"
 # Here we take the model "name" the user enter.
 
 sun = loader.loadModel("models/planet_sphere")
-sun.reparentTo(render)
-sun.setScale(2)
+sun.reparentTo(solarSystem1)
+sun.setScale(1)
 
 mercury = loader.loadModel("models/planet_sphere")
 mercury.reparentTo(orbit_root_mercury)
-mercury.setPos(7.6 * 30.0,0,0)
-mercury.setScale(1.0)
+mercury.setPos(0.076,0,0)
+mercury.setScale(0.027)
 
 venus = loader.loadModel("models/planet_sphere")
 venus.reparentTo(orbit_root_venus)
-venus.setPos(14.2 * 30.0,0,0)
-venus.setScale(2.6)
+venus.setPos(0.197,0,0)
+venus.setScale(0.26)
 
 mars = loader.loadModel("models/planet_sphere")
 mars.reparentTo(orbit_root_mars)
-mars.setPos(19.7 * 30.0,0,0)
-mars.setScale(30)
+mars.setPos(0.3 * 30.0,0,0)
+mars.setScale(0.3)
 
 # Loading the plane_ground
 #plane = loader.loadModel("./models/xyzViewPlane.egg")

@@ -166,7 +166,7 @@ class Planets:
         
         self.orbit_root_testPlanet2 = render.attachNewNode('orbit_root_testPlanet2')
         
-        xyzSum = 0.0088 * self.galaxyScale
+        xyzSum = 2.6 
         
         self.testPlanet2 = loader.loadModel("../resources/models/p_Earth2.egg")
         
@@ -178,12 +178,12 @@ class Planets:
         
         self.orbit_root_testPlanet = render.attachNewNode('orbit_root_testPlanet')
         
-        xyzSum = 0.0012 * self.galaxyScale
+        xyzSum2 = 0.0012 * self.galaxyScale
         
         self.testPlanet = loader.loadModel("../resources/models/p_Earth2.egg")
         
         self.testPlanet.reparentTo(self.orbit_root_testPlanet2)
-        self.testPlanet.setScale(xyzSum, xyzSum, xyzSum)
+        self.testPlanet.setScale(xyzSum2, xyzSum2, xyzSum2)
         self.testPlanet.setPos(0.15000,0.15000,0)
     
 ### END OF Planets CLASS
