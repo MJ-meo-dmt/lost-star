@@ -44,50 +44,59 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
-#-->
+#----->
+# Sys Imports/Buildin.
+import random, sys, os, math
 
-# Load Config File
+# Config Load/import.
+from config import *
+from panda3d.core import loadPrcFile, loadPrcFileData
 
-from panda3d.core import loadPrcFile
- 
-loadPrcFile("../config/Config.prc")
+# Load devConfig file.
 
-
+if (useDevmode == True):
+    loadPrcFile(ConfData)
+    print "+ Config Settings loaded..."
+    print ""
+    
+# Config check Use Pstats.
+if (usePstat == True):
+    PStatClient.connect()
+    print "+ Using Pstat Client..."
+    
 # Engine imports
+print "+ Loading Engine..."
+print "<---------------------------------------->"
 import direct.directbase.DirectStart
-# CORE
+print "<---------------------------------------->"
+print ""
+
+# CORE imports
 from panda3d.core import WindowProperties
-from panda3d.core import CollisionTraverser,CollisionNode
-from panda3d.core import CollisionHandlerQueue,CollisionRay
-from panda3d.core import CollisionTube,CollisionSegment
-from panda3d.core import Filename,AmbientLight,DirectionalLight
-from panda3d.core import PandaNode,NodePath,Camera,TextNode
-from panda3d.core import Point3,Vec3,Vec4,BitMask32
+from panda3d.core import Filename
+from panda3d.core import Camera
 from panda3d.core import LightRampAttrib
 from panda3d.core import ColorBlendAttrib
 from panda3d.core import Filename,Buffer,Shader
-# TASK
-from direct.task import Task
-# PANDAC
-from pandac.PandaModules import *
-# DIRECT
-from direct.filter.CommonFilters import *
-from direct.gui.OnscreenText import OnscreenText
-from direct.actor.Actor import Actor
-from direct.showbase.DirectObject import DirectObject
-# EXTRA
-import random, sys, os, math
 
-##
+# TASK imports
+from direct.task import Task
+
+# PANDAC imports
+from pandac.PandaModules import *
+
+# DIRECT imports
+from direct.filter.CommonFilters import *
+from direct.showbase.DirectObject import DirectObject
+
 # Game Imports
-#
 from Galaxy import Galaxy
 from Player import Player
 from Gui import Gui
 
 
 ###########################
-########## CODE ###########
+########### CODE #########
 ##########################
 
 # World class. -MAIN-
@@ -95,29 +104,63 @@ class Main(DirectObject):
 
     def __init__(self):
 		
-		# Random check test.
-        print "Test Hello"
+		# Print Init.
+        print ""
+        print "#####################################"
+        print "--  MAIN INIT --"
+        print ""
         
-        # Just for now..
-        base.camLens.setNear(0.05)
-        base.camLens.setFar(1000000)
-        base.camLens.setFov(90)
+        # Camera Settings.
+        base.camLens.setFov(camFOV)
+        base.camLens.setNear(camNear)
+        base.camLens.setFar(camFar)
+        print "Camera settings loaded..."
         
-        render.setShaderAuto()
-        # Filters working on supported VGA GPU's only
+        # Shader & Filter settings.
+        if useAutoShader == True:
+            render.setShaderAuto()
+            print "+ Using AutoShader..."
+        
+        # Set Filter.
         filters = CommonFilters(base.win, base.cam)
-        #filters.setBloom()
-        filters.setCartoonInk()
-        #
         
-        #render.setAntialias(AntialiasAttrib.MAuto)
+        # Set Bloom.
+        if useBloom == True:
+            filters.setBloom()
+            print "+ Using Bloom..."
+            
+        # Set CartoonInk.
+        if useCartoonInk == True:
+            filters.setCartoonInk()
+            print "+ Using CartoonInk()"
+            
+        # Set Antialias.
+        if useAntialias == True:
+            render.setAntialias(AntialiasAttrib.MAuto)
+            print "+ Using Antialias(Mauto)"
+            
+        #--------------------------------------->
+        # RUN OUTER MAIN CLASSES.
+        init_Galaxy = Galaxy()
+        init_Gui = Gui()
+        init_PlayerControl = Player()
+        
+        
+        #-------------------------------------<
+        
+         # STATS SETTINGS
+        
+        # Use Analyzer.
+        if useAnalyze == True:
+            print ""
+            print "##############################>"
+            print "## ANALYZE DATA ##"
+            print "###########################"
+            print ""
+            render.analyze()
+
 ### END OF MAIN CLASS
 
-# CLASS CALLS (INIT)
-GameMain = Main()
-init_Galaxy = Galaxy()
-init_Gui = Gui()
-init_PlayerControl = Player()
-
-
+Main()
+print "= RUNNING ="
 run()
