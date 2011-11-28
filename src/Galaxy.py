@@ -189,7 +189,7 @@ class Planets:
 ### END OF Planets CLASS
 
 # EVERYTHING TO DO WITH SPACE STATIONS. Here will be subclasses.
-class SpaceStationControl:
+class Station:
     
     def __init__(self):
         
