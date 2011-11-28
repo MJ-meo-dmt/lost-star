@@ -69,31 +69,50 @@ from config import *
 ########## CODE ###########
 ##########################
 
-# Connect to the DB 
-conn = sqlite.connect("db/rpg.db")
-
-# Setup cursor for conn
-cur = conn.cursor()
 
 class dbMain:
-	
-	def __init__(self):
-		
-		# Connect to the DataBase.
-		self.conn = sqlite.connect(db_path)
-		
-		# Set the Cursor.
-		self.cur = self.conn.cursor()
-		
-		self.cur.execute("select * from planetData")
-		for row in self.cur:
-			
-			print "The first test: %s, %f" % (row[0], row[1])
-		
-		
-	
+    
+    
+    
+    def __init__(self):
+        
+        # Print Init.
+        print ""
+        print "#####################################"
+        print "--  DB LOADED --"
+        print ""
+        
+        
+    
+    # Return the sql request data.
+    def getPlanetData(self, PID, COL):
+        """Returns the value requested by the params, PID + COL
+            PID = PlanetID. (int value)
+            COL = Column Name in db. (str value)
+            Fetch one value at a time.
+        """
+        # Get connection to db.
+        self.conn = sqlite.connect(db_path)
+        
+        # Set cursor.
+        self.cur = self.conn.cursor()
+        
+        # Send request for planetID, COL=str, PID=int.
+        self.sqlQ = "select %s from planetData where planetID = '%d'" % (COL, PID)
+        
+        self.cur.execute(self.sqlQ)
+        self.planetID = self.cur.fetchone()
+        return self.planetID
+        
+        self.conn.commit()
+        self.conn.close()
+        
+    # Testing
+    #scale = getPlanetData(COL2, PID2)[0]
+    
+    #print scale, "From DB.py"
+    
 
-dbMain()
 
 
 
