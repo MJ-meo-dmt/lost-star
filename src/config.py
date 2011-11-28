@@ -62,15 +62,63 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # Game Imports
 #
 
-
-###########################
-########## CODE ###########
-##########################
-
 # MAIN CONFIG FILE
+#>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ### DB CONFIG ###
-db_path = "db/rpg.db"
+
+db_path = "db/gameData.db"
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# Planet ID's for sql.
+
+### Planet ID's ###
+
+# PID = 1, 2, 3, 4 e.g
+# int value = planetID in sql.
+
+# Planet Col/FIELD ID.
+
+COL1 = 'planetName'
+COL2 = 'planetScale'
+COL3 = 'planetPosX'
+COL4 = 'planetPosY'
+COL5 = 'planetPosZ'
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# GAME SETTINGS
+ConfData = "../config/Config.prc"
+
+### DEVMODE ###
+useDevmode = True
+usePstat = False
+
+### CAMERA SETTINGS ###
+
+camFOV = 60
+camNear = 0.05
+camFar = 1000000
+
+### SHADER & FILTER SETTINGS ###
+
+useAutoShader = True
+useBloom = False
+useCartoonInk = False
+useAntialias = False
+useAnalyze = False
+
+
+
+
+# LOAD CHECK.
+print "+ CONFIG LOADED..."
+
+
+
+
+
 
 
 
