@@ -97,14 +97,14 @@ usePstat = False
 
 ### CAMERA SETTINGS ###
 
-camFOV = 60
+camFOV = 90
 camNear = 0.05
 camFar = 1000000
 
 ### SHADER & FILTER SETTINGS ###
 
 useAutoShader = True
-useBloom = False
+useBloom = True
 useCartoonInk = False
 useAntialias = False
 useAnalyze = False

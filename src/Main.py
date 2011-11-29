@@ -126,7 +126,7 @@ class Main(DirectObject):
         
         # Set Bloom.
         if useBloom == True:
-            filters.setBloom()
+            setBloom = filters.setBloom(blend=(0.8,0.8,0.8,1), desat=-0.5, intensity=4.0, size="small")
             print "+ Using Bloom..."
             
         # Set CartoonInk.

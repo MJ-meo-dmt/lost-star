@@ -202,7 +202,7 @@ class PlayerControl(DirectObject, Planets):
         self.root_playerShip = render.attachNewNode('playerShip')
         self.playerShip = Actor("../resources/models/scout_Ship.egg")
         self.playerShip.setScale(0.001)
-        self.playerShip.setPos(0.0, 0.0, 0.0)
+        self.playerShip.setPos(0.200*30, 0.10, 0.0)
         #self.playerShip.setShaderInput("tint", Vec4(1.0, 0.5, 0.5, 1.0))
         #self.playerShip.setShader(self.myShader)
         self.playerShip.reparentTo(self.root_playerShip)
