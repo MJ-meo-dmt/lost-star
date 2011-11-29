@@ -118,11 +118,7 @@ class Galaxy(DirectObject):
         
         #Load Space Station Data
         #testSpaceStation = SpaceStationControl()
-        
-        
-        
-        
-        
+
 # END OF Galaxy CLASS.
 
 

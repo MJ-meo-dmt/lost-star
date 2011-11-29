@@ -58,8 +58,8 @@ import os
 # Config File
 from pandac.PandaModules import *
 loadPrcFileData("setup", """
-sync-video 0
-#show-frame-rate-meter #t
+sync-video 1
+show-frame-rate-meter #t
 win-size 800 600
 #win-size 1024 768
 #win-size 1280 800
@@ -71,6 +71,8 @@ win-size 800 600
 #basic-shaders-only #t
 fullscreen #f
 #audio-library-name null
+want-directtools #f
+want-tk #f
 """)
 
 # Engine Imports
@@ -88,39 +90,86 @@ base.setBackgroundColor(0,0,0,0)
 filters = CommonFilters(base.win, base.cam)
 filterok = filters.setBloom(blend=(0,0,0,1), desat=-0.5, intensity=3.0, size="small")
 
+################################
+#######       SCRIPTING PART      ##########
+#######      COPY FROM HERE    ###########
+#################################
 
 solarSystem1 = render.attachNewNode('solarSystem1')
+sun1 = solarSystem1.attachNewNode('sun1')
+planet1 = sun1.attachNewNode('planet1')
+planet2 = sun1.attachNewNode('planet2')
+planet3 = sun1.attachNewNode('planet3')
+planet4 = sun1.attachNewNode('planet4')
+planet5 = sun1.attachNewNode('planet5')
+planet6 = sun1.attachNewNode('planet6')
+planet7 = sun1.attachNewNode('planet7')
+planet8 = sun1.attachNewNode('planet8')
+planet9 = sun1.attachNewNode('planet9')
 
+dummySphere = "models/planet_sphere"
 
-# This is for the demo Model.
-testModel = "./models/planet_sphere.egg"
+sun = loader.loadModel(dummySphere)
+sun.reparentTo(sun1)
+sun.setScale(3.0)
+sun.setPos(0,0,0)
 
-# Here we take the model "name" the user enter.
+mercury = loader.loadModel(dummySphere)
+mercury.reparentTo(planet1)
+mercury.setPos((0.076*30)+ 4.712,0,0)
+mercury.setScale(0.01)
 
-sun = loader.loadModel("models/planet_sphere")
-sun.reparentTo(solarSystem1)
-sun.setScale(1)
+venus = loader.loadModel(dummySphere)
+venus.reparentTo(planet2)
+venus.setPos((0.142*30)+ 4.712,0,0)
+venus.setScale(0.026)
 
-mercury = loader.loadModel("models/planet_sphere")
-mercury.reparentTo(orbit_root_mercury)
-mercury.setPos(0.076,0,0)
-mercury.setScale(0.027)
+earth = loader.loadModel(dummySphere)
+earth.reparentTo(planet3)
+earth.setPos((0.197*30)+4.712,0,0)
+earth.setScale(0.027)
 
-venus = loader.loadModel("models/planet_sphere")
-venus.reparentTo(orbit_root_venus)
-venus.setPos(0.197,0,0)
-venus.setScale(0.26)
+mars = loader.loadModel(dummySphere)
+mars.reparentTo(planet4)
+mars.setPos((0.300*30)+4.712,0,0)
+mars.setScale(0.015)# 1.5cm
 
-mars = loader.loadModel("models/planet_sphere")
-mars.reparentTo(orbit_root_mars)
-mars.setPos(0.3 * 30.0,0,0)
-mars.setScale(0.3)
+jupiter = loader.loadModel(dummySphere)
+jupiter.reparentTo(planet5)
+jupiter.setPos((1.025*30)+4.712,0,0)
+jupiter.setScale(0.300)# 
 
-# Loading the plane_ground
+saturn = loader.loadModel(dummySphere)
+saturn.reparentTo(planet6)
+saturn.setPos((1.880*30)+4.712,0,0)
+saturn.setScale(0.250)
+
+uranus = loader.loadModel(dummySphere)
+uranus.reparentTo(planet7)
+uranus.setPos((3.780*30)+4.712,0,0)
+uranus.setScale(0.100)
+
+neptune = loader.loadModel(dummySphere)
+neptune.reparentTo(planet8)
+neptune.setPos((5.920*30)+4.712,0,0)
+neptune.setScale(0.098)
+
+###
+##  EXTRA MODELS
+### 
+
+# Plane background.
+
 #plane = loader.loadModel("./models/xyzViewPlane.egg")
 #plane.reparentTo(render)
 #plane.setPos(0,0,-52)
 
+#######################################
+#########           SCRIPTING END           ############
+#########            COPY TO HERE           ############
+########################################
+    
+    
     
 def printText(name, message, color): 
     text = TextNode(name) # create a TextNode. Note that 'name' is not the text, rather it is a name that identifies the object.
@@ -196,7 +245,7 @@ OnscreenText(text="- Use Mouse Middle Button to Look around", style=2,  fg=(1,1,
 OnscreenText(text="- Use Mouse Right+Click to zoom In and Out", style=2,  fg=(1,1,1,1), pos=(-1.27,-0.90), scale = .04)
 
 
-# Otherwise we can move the came
+# Otherwise we can't move the cam
 #base.disableMouse() 
 
 
