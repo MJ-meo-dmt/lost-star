@@ -100,24 +100,26 @@ class dbMain:
         # Send request for planetID, COL=str, PID=int.
         self.sqlQ = "select %s from planetData where planetID = '%d'" % (COL, PID)
         
+        print COL
+        print PID
         self.cur.execute(self.sqlQ)
         self.planetID = self.cur.fetchone()
         return self.planetID
         
-        self.conn.commit()
-        self.conn.close()
-        
-    # Testing
-    #scale = getPlanetData(COL2, PID2)[0]
-    
-    #print scale, "From DB.py"
-    
+        #self.conn.commit() # This method doesn't commit anything.
+        #self.conn.close() # Best if we remove it from here and use it after data has been retrieved with in code.
 
 
 
 
+# Testing part
+"""
+db = dbMain()
 
+scale = db.getPlanetData(2, COL1)[0]
 
+print scale, "From DB.py"
+"""
 
 
 
