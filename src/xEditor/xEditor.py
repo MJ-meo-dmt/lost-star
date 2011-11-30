@@ -120,56 +120,64 @@ planet9 = sun1.attachNewNode('planet9')
 
 dummySphere = "models/planet_sphere"
 
+
+# ----------------------------------------->>
+# Global Variables for Scale.
+
+spaceDis = 30 # From the pdf 30cm.
+sunDispi = 0.9424 # Sun pi something weird...
+
+
 sun = loader.loadModel(dummySphere)
 sun.setMaterial(mat1)
 sun.reparentTo(sun1)
-sun.setScale(3.0)
+sun.setScale(30.00)
 sun.setPos(0,0,0)
 
 mercury = loader.loadModel(dummySphere)
 mercury.reparentTo(planet1)
-mercury.setPos((0.076*30)+ 4.712,0,0)
-mercury.setScale(0.01)
+mercury.setPos((0.76 + sunDispi)* spaceDis,0,0)
+mercury.setScale(0.10)
 
 venus = loader.loadModel(dummySphere)
 venus.reparentTo(planet2)
-venus.setPos((0.142*30)+ 4.712,0,0)
-venus.setScale(0.026)
+venus.setPos((1.42+ sunDispi)* spaceDis,0,0)
+venus.setScale(0.26)
 
 earth = loader.loadModel(dummySphere)
 earth.reparentTo(planet3)
-earth.setPos((0.197*30)+4.712,0,0)
-earth.setScale(0.027)
+earth.setPos((1.97+ sunDispi)* spaceDis,0,0)
+earth.setScale(0.27)
 
 mars = loader.loadModel(dummySphere)
 mars.reparentTo(planet4)
-mars.setPos((0.300*30)+4.712,0,0)
-mars.setScale(0.015)# 1.5cm
+mars.setPos((3.00+ sunDispi)* spaceDis,0,0)
+mars.setScale(0.15)# 1.5cm
 
 jupiter = loader.loadModel(dummySphere)
 jupiter.reparentTo(planet5)
-jupiter.setPos((1.025*30)+4.712,0,0)
-jupiter.setScale(0.300)# 
+jupiter.setPos((10.25+ sunDispi)* spaceDis,0,0)
+jupiter.setScale(3.00)# 
 
 saturn = loader.loadModel(dummySphere)
 saturn.reparentTo(planet6)
-saturn.setPos((1.880*30)+4.712,0,0)
-saturn.setScale(0.250)
+saturn.setPos((18.80+ sunDispi)* spaceDis,0,0)
+saturn.setScale(2.50)
 
 uranus = loader.loadModel(dummySphere)
 uranus.reparentTo(planet7)
-uranus.setPos((3.780*30)+4.712,0,0)
-uranus.setScale(0.100)
+uranus.setPos((37.80+ sunDispi)* spaceDis,0,0)
+uranus.setScale(1.00)
 
 neptune = loader.loadModel(dummySphere)
 neptune.reparentTo(planet8)
-neptune.setPos((5.920*30)+4.712,0,0)
-neptune.setScale(0.098)
+neptune.setPos((59.20+ sunDispi)* spaceDis,0,0)
+neptune.setScale(0.98)
 
 pluto = loader.loadModel(dummySphere)
 pluto.reparentTo(planet9)
-pluto.setPos((7.780*30)+4.712,0,0)
-pluto.setScale(0.005)
+pluto.setPos((77.80+ sunDispi)* spaceDis,0,0)
+pluto.setScale(0.05)#0.005
 
 ###
 ##  EXTRA MODELS
