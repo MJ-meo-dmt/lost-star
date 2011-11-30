@@ -79,8 +79,10 @@ db_path = "db/gameData.db"
 # int value = planetID in sql.
 
 # Planet Col/FIELD ID.
-
-COL1 = 'planetName'
+# Make sure not to get confused with the column names/numbering within the sqldb.
+# This way slice better.
+COL0 = 'planetName'
+COL1 = 'planetDis'
 COL2 = 'planetScale'
 COL3 = 'planetPosX'
 COL4 = 'planetPosY'
@@ -97,14 +99,14 @@ usePstat = False
 
 ### CAMERA SETTINGS ###
 
-camFOV = 90
+camFOV = 45
 camNear = 0.05
 camFar = 1000000
 
 ### SHADER & FILTER SETTINGS ###
 
 useAutoShader = True
-useBloom = True
+useBloom = False
 useCartoonInk = False
 useAntialias = False
 useAnalyze = False
