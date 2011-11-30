@@ -158,6 +158,14 @@ class Main(DirectObject):
             print "###########################"
             print ""
             render.analyze()
+        
+        """
+        base.setBackgroundColor(0.1,0.1,0.1)
+        self.fog = Fog("SpaceFog")
+        self.fog.setColor(0.1,0.1,0.1)
+        self.fog.setExpDensity(0.1)
+        render.setFog(self.fog)
+        """
 
 ### END OF MAIN CLASS
 

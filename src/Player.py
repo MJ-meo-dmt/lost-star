@@ -91,7 +91,7 @@ class Player(DirectObject):
         print "--  PLAYER LOADED --"
         print ""
         
-        PlayerControlInit = PlayerControl()
+        self.PlayerControlInit = PlayerControl()
         # RACE EXTRA STATS COULD GO HERE 
 ### END OF Player CLASS.
 
