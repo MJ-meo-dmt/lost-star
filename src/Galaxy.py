@@ -166,8 +166,16 @@ class Planets(SpaceLights):
         
     def earthPlanet(self):
         
-        # Here is the code for the creation of the planets
-        DB = dbMain()
+        # INIT The dbMain Class.
+        self.DB = dbMain()
+        
+        # Use DB.getPlanetData(PID, COL)
+        # PID = planetID (sql)
+        # COL = sql_Table_Column_Name: "planetDis" (Check the config file) 
+        # And cur.close() After use
+        
+        planetData = self.DB.getPlanetData(3, COL2)
+        print "Got data!"
         
         #####
         ## PLANET LOAD.
@@ -175,7 +183,7 @@ class Planets(SpaceLights):
         ##  THIS IS ONLY FOR TESTING NO SQL DATA IS EVEN BEING USED.
         ###
         
-        # Setting up custom materials.
+        # Setting up custom materials. For the Sun atm.
         self.mat1 = Material()
         self.mat1.setShininess(2.0)
         self.mat1.setDiffuse(VBase4(1,1,0,1))
@@ -185,7 +193,7 @@ class Planets(SpaceLights):
         self.mat1.setTwoside(True)
 
 
-
+        # Setup dummynodes.
         self.solarSystem1 = render.attachNewNode('solarSystem1')
         self.sun1 = self.solarSystem1.attachNewNode('sun1')
         self.planet1 = self.sun1.attachNewNode('planet1')
@@ -198,9 +206,12 @@ class Planets(SpaceLights):
         self.planet8 = self.sun1.attachNewNode('planet8')
         self.planet9 = self.sun1.attachNewNode('planet9')
         
-        
+        # Path for dummy Sphere.
         dummySphere = "../resources/models/planet_sphere"
 
+        # Planets in order.
+        # Starting with our Star first (SUN)
+        
         self.sun = loader.loadModel(dummySphere)
         self.sun.setMaterial(self.mat1)
         self.sun.reparentTo(self.sun1)
