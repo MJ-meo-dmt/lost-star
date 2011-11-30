@@ -177,7 +177,7 @@ neptune.setScale(0.98)
 pluto = loader.loadModel(dummySphere)
 pluto.reparentTo(planet9)
 pluto.setPos((77.80+ sunDispi)* spaceDis,0,0)
-pluto.setScale(0.05)#0.005
+pluto.setScale(0.05)#0.05
 
 ###
 ##  EXTRA MODELS
