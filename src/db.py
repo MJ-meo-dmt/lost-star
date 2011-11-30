@@ -85,10 +85,10 @@ class dbMain:
         
     
     # Return the sql request data.
-    def getPlanetData(self, PID, COL):
-        """Returns the value requested by the params, PID + COL
+    def getPlanetData(self, PID, COL1, COL2, COL3): # COL
+        """Returns the value requested by the params, PID + COL1 -> 3
             PID = PlanetID. (int value)
-            COL = Column Name in db. (str value)
+            COL1 to 3 = Column Name in db. (str value) check config.
             Fetch one value at a time.
         """
         # Get connection to db.
@@ -98,13 +98,29 @@ class dbMain:
         self.cur = self.conn.cursor()
         
         # Send request for planetID, COL=str, PID=int.
-        self.sqlQ = "select %s from planetData where planetID = '%d'" % (COL, PID)
+        #self.sqlQ = "select %s from planetData where planetID = '%d'" % (COL, PID)
+        self.sqlQ = "select %s, %s, %s from planetData where planetID = '%d'" % (COL1, COL2, COL3, PID)
         
-        print COL
-        print PID
-        self.cur.execute(self.sqlQ)
-        self.planetID = self.cur.fetchone()
-        return self.planetID
+        
+        # Checking.
+        #print "COL VALUE: '"+ COL+ "'"
+        print "PID VALUE: '%d'" % (PID)
+        print "---------------------------->>>"
+        
+        self.cur.execute(self.sqlQ) 
+        print "cur.execute -- DONE"
+        
+        self.planetData1 = self.cur.fetchone()
+        print "cur.fetchone - 1 -- DONE"
+        
+        self.planetData2 = self.cur.fetchone()
+        print "cur.fetchone - 2 -- DONE"
+        
+        self.planetData3 = self.cur.fetchone()
+        print "cur.fetchone - 3 -- DONE"
+        
+        return self.planetData1, self.planetData2, self.planetData3
+        print "planetData return -- DONE"
         
         #self.conn.commit() # This method doesn't commit anything.
         #self.conn.close() # Best if we remove it from here and use it after data has been retrieved with in code.
@@ -113,18 +129,19 @@ class dbMain:
 
 
 # Testing part
-"""
+
 db = dbMain()
+# Param: planetID, COL Id0 - > 2 check config
+planetData = db.getPlanetData(6, COL0, COL1, COL2)[0]
+# slice it by 0 --> 2 (0=planetName[TEXT], 1=planetDis[REAL]}, 2=planetScale[REAL])
+checkFloat = planetData[2]
 
-scale = db.getPlanetData(2, COL1)[0]
+print "Float: ", checkFloat
+print "Get Test: "+ str(planetData[0])
 
-print scale, "From DB.py"
-"""
+mercuryData = db.getPlanetData(2, COL0, COL1, COL2)[0]
 
-
-
-
-
+print mercuryData[2]
 
 
 
