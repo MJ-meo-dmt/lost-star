@@ -11,23 +11,17 @@ DEVELOPERS
 * MJ-me0-dmt (Designer)
 
 TODO*
-# Basic or so we hope :P
-- Get proper ship handling 
-- Get crosshair to move with mouse ( basically fix up the whole gui system )
-- Get Scale correct
-- Make a starfield effect
+- Get planets to rotate around the sun
+- Add moons, and make them rotate around each of their parents.
+- Asteroids or get a way to do.
+
+DONE*
+- Total code rewrite/sortout
+- loaded up basic planets, layout, distance, scale
+- Done basic lights, may need some tweaking
+- Done new skyBox needs tweaking aswell. (also check that no effects, effect the skybox)
 
 
-# Later / Advance
-- Add physics
-- Setup Collisions
-- Get Planets to rotate around Sun (real-time effect)
-- Design a planet generator ( This deppend on the way we want to make planets.) 
-  We could go for normal looks or we could go for procedural planet generation with nice detail... but yea thats another story.
-- Design a astroid generator
 
-
-# Extras
-- Get xyzView more accurate, So we can use it for scaling and Hpr checking."1:1" Though we have to redo the current scale!
 
 
