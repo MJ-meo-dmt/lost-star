@@ -23,7 +23,7 @@ load-display pandagl
 # while -1 lets the window manager choose the position.
 
 win-origin -2 -2
-win-size 800 600
+win-size 1024 768
 
 # Uncomment this line if you want to run Panda fullscreen instead of
 # in a window.
@@ -62,8 +62,6 @@ default-directnotify-level warning
 # particular Config.prc file.
 
 model-path    $MAIN_DIR
-model-path    /usr/share/panda3d
-model-path    /usr/share/panda3d/models
 
 # This enable the automatic creation of a TK window when running
 # Direct.
@@ -73,7 +71,7 @@ want-tk           #f
 
 # Enable/disable performance profiling tool and frame-rate meter
 
-want-pstats            #t
+want-pstats            #f
 show-frame-rate-meter  #t
 
 # Enable audio using the OpenAL audio library by default:
@@ -82,7 +80,7 @@ audio-library-name p3openal_audio
 
 # Enable the use of the new movietexture class.
 
-use-movietexture #t
+use-movietexture #f
 
 # The new version of panda supports hardware vertex animation, but it's not quite ready
 
@@ -90,7 +88,7 @@ hardware-animated-vertices #f
 
 # Enable the model-cache, but only for models, not textures.
 
-model-cache-dir $HOME/.panda3d/cache
+model-cache-dir $MAIN_DIR
 model-cache-textures #f
 
 # This option specifies the default profiles for Cg shaders.
