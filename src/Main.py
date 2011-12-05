@@ -106,7 +106,7 @@ class Main(ShowBase, DirectObject):
         # Bloom Settings.
         if useBloom == True:
             filters = CommonFilters(base.win, base.cam)
-            BloomFilter = filters.setBloom(blend=(0.8, 0.8, 0.8, 1), desat=-0.3, intensity=1.0, size="small")
+            BloomFilter = filters.setBloom(blend=(0.8, 0.8, 0.8, 1), desat=-0.4, intensity=3.0, size="small")
             
         ### INIT GAME CLASSES ###
         

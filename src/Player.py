@@ -88,7 +88,7 @@ class PlayerShip:
         self.playerShip = Actor("../resources/models/scout_Ship.egg")  # Should create a db_table for ships, items e.g
         self.playerShip.reparentTo(self.playerShipNode)
         self.playerShip.setPos(103.9, 0.5, 0)
-        self.playerShip.setScale(0.05)  # Should be 0.001 | The smallest planet(pluto) has the size of 0.05.
+        self.playerShip.setScale(1)  # Should be 0.001 | The smallest planet(pluto) has the size of 0.05.
 
 # PLAYERSHIP Class END.   
 

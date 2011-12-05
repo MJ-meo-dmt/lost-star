@@ -61,7 +61,7 @@ dbPath = "db/gameData.db"
 
 ##  DEVELOPMENT EXTRAS  ##
 useConfigPrc = True
-usePstats = False
+usePstats = True
 
 ## CAMERA SETTINGS  ##
 camFov = 70
@@ -72,7 +72,7 @@ camFar = 1000000
 
 ## VIDEO SETTINGS  ##
 useAutoShader = True
-useBloom = False
+useBloom = True
 useCartoonInk = False
 useAntialias = False
 useAnalyze = True
