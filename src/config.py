@@ -1,121 +1,103 @@
-##########################################
-###									######
-###		THE VOID					######
-###		PROJECT : lost-star			######
-###		0x7dc 'EDEN'				######
-###									######
-##########################################
-# Start: early Oct. 2011
-
-# DEVELOPERS
-
-# 	* MJ-me0-dmt  - 1
-
-#-->
-
-# License
-'''
-Free BSD license 3-clause
-
-Copyright (c)<2011>, <Martin de Bruyn>
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-    - Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    - Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-    - Neither the name of the <organization> nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-'''
-
-#-->
-
-# Engine imports
-
-# CORE
-
-# TASK
-
-# PANDAC
-
-# DIRECT
-
-# EXTRA
-
+#!/usr/bin/python
+##############################################>
+##############################################>
 ##
-# Game Imports
-#
+##   Free BSD license 3-clause
+##
+##   Copyright (c)<2011>, <Martin de Bruyn>
+##   All rights reserved.
+##
+##   Redistribution and use in source and binary forms, with or without
+##   modification, are permitted provided that the following conditions are met:
+##
+##      - Redistributions of source code must retain the above copyright
+##          notice, this list of conditions and the following disclaimer.
+##      - Redistributions in binary form must reproduce the above copyright
+##          notice, this list of conditions and the following disclaimer in the
+##          documentation and/or other materials provided with the distribution.
+##      - Neither the name of the <organization> nor the
+##          names of its contributors may be used to endorse or promote products
+##          derived from this software without specific prior written permission.
+##
+##   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+##   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+##   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+##   DISCLAIMED. IN NO EVENT SHALL <MARTIN DE BRUYN> BE LIABLE FOR ANY
+##   DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+##   (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+##   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+##   ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+##   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+##   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+##
+#########################################################################################>
+#########################################################################################>
 
-# MAIN CONFIG FILE
-#>>>>>>>>>>>>>>>>>>>>>>>>>>
+#  Developers.
 
-### DB CONFIG ###
+#   MJ-meo-dmt.
 
-db_path = "db/gameData.db"
 
-#>>>>>>>>>>>>>>>>>>>>>>>>>>
+####>   IMPORTS   <####
 
-# Planet ID's for sql.
+# System Imports
+import sys, os, random, math
 
-### Planet ID's ###
+# Panda Imports
 
-# PID = 1, 2, 3, 4 e.g
-# int value = planetID in sql.
 
-# Planet Col/FIELD ID.
-# Make sure not to get confused with the column names/numbering within the sqldb.
-# This way slice better.
-COL0 = 'planetName'
-COL1 = 'planetDis'
-COL2 = 'planetScale'
-COL3 = 'planetPosX'
-COL4 = 'planetPosY'
-COL5 = 'planetPosZ'
+####>  MAIN CONFIG   <####
+print "Loading Main Config..."
 
-#>>>>>>>>>>>>>>>>>>>>>>>>>>
+### PATHS ###
 
-# GAME SETTINGS
-ConfData = "../config/Config.prc"
+# Config.prc path.
+confPrc = "../config/Config.prc"
 
-### DEVMODE ###
-useDevmode = True
-usePstat = False
+# Database config.
+dbPath = "../db/gameData.db"
+####>
 
-### CAMERA SETTINGS ###
 
-camFOV = 45
+##  DEVELOPMENT EXTRAS  ##
+useConfigPrc = True
+usePstats = False
+
+## CAMERA SETTINGS  ##
+camFov = 70
 camNear = 0.05
 camFar = 1000000
+###>
 
-### SHADER & FILTER SETTINGS ###
 
+## VIDEO SETTINGS  ##
 useAutoShader = True
 useBloom = False
 useCartoonInk = False
 useAntialias = False
-useAnalyze = False
+useAnalyze = True
+###>
+
+
+##  DATABASE IDs  ##
+
+# Table IDs.
+col0 = 'planetName'
+col1 = 'planetDis'
+col2 = 'planetScale'
+col3 = 'planetPosX'
+col4 = 'planetPosY'
+col5 = 'planetPosZ'
+###>
+print "Main Config Loaded >>>"
 
 
 
 
-# LOAD CHECK.
-print "+ CONFIG LOADED..."
+
+
+
+
 
 
 
