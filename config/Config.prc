@@ -62,6 +62,9 @@ default-directnotify-level warning
 # particular Config.prc file.
 
 model-path    $MAIN_DIR
+model-path    ../resources/models
+model-path    ../resources/models/textures
+
 
 # This enable the automatic creation of a TK window when running
 # Direct.
@@ -88,7 +91,7 @@ hardware-animated-vertices #f
 
 # Enable the model-cache, but only for models, not textures.
 
-model-cache-dir $MAIN_DIR
+model-cache-dir $MAIN_DIR/cache
 model-cache-textures #f
 
 # This option specifies the default profiles for Cg shaders.
