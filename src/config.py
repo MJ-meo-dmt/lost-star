@@ -55,7 +55,7 @@ print "Loading Main Config..."
 confPrc = "../config/Config.prc"
 
 # Database config.
-dbPath = "../db/gameData.db"
+dbPath = "db/gameData.db"
 ####>
 
 
