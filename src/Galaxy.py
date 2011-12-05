@@ -63,18 +63,18 @@ class Galaxy(DirectObject):
     
     # ShowBase.
     def __init__(self):
-        #ShowBase.__init__(self)
         
         print "Starting Galaxy..."
         base.setBackgroundColor(0,0,0,0)
         
         # Load the Skybox.
-        self.skyBox = loader.loadModel("../resources/models/Skybox.egg")#("skyBoxNew.egg")#
+        self.skyBox = loader.loadModel("../resources/models/GenericSkybox.egg")#
         self.skyBox.setBin("background", 0)
         self.skyBox.setScale(1,1,1)
         self.skyBox.setDepthTest(False)
         self.skyBox.setZ(render, 0)
         self.skyBox.clearLight()
+        self.skyBox.setLightOff()
         self.skyBox.setCompass()
         self.skyBox.reparentTo(base.camera)
         
@@ -119,11 +119,6 @@ class System1():
         # So we can get data from 'planetData' table.
         DB = db()
         self.planets(DB)
-        
-        # Galaxy Instance.
-        #initGalaxy = Galaxy()
-        #self.sunlight = initGalaxy.sunlight()
-        #render.setLight(self.sunlight)
         
         
     def planets(self, DB):
