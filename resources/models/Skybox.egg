@@ -12,7 +12,7 @@
   <Scalar> shininess {0.0}
 }
 <Texture> purple-nebula-sky.001 {
-  "textures/SkyboxPurpleNebula/right1.png"
+  "FinalSkyBox/system1_right1.png"
   <Scalar> saved-result { 1 }
   <Scalar> envtype { MODULATE }
   <Scalar> minfilter { LINEAR }
@@ -20,7 +20,7 @@
   <Scalar> wrap { CLAMP }
 }
 <Texture> purple-nebula-sky.003 {
-  "textures/SkyboxPurpleNebula/back6.png"
+  "FinalSkyBox/system1_back6.png"
   <Scalar> saved-result { 1 }
   <Scalar> envtype { MODULATE }
   <Scalar> minfilter { LINEAR }
@@ -28,7 +28,7 @@
   <Scalar> wrap { CLAMP }
 }
 <Texture> purple-nebula-sky.002 {
-  "textures/SkyboxPurpleNebula/left2.png"
+  "FinalSkyBox/system1_left2.png"
   <Scalar> saved-result { 1 }
   <Scalar> envtype { MODULATE }
   <Scalar> minfilter { LINEAR }
@@ -36,7 +36,7 @@
   <Scalar> wrap { CLAMP }
 }
 <Texture> purple-nebula-sky.004 {
-  "textures/SkyboxPurpleNebula/bottom4.png"
+  "FinalSkyBox/system1_bottom4.png"
   <Scalar> saved-result { 1 }
   <Scalar> envtype { MODULATE }
   <Scalar> minfilter { LINEAR }
@@ -44,7 +44,7 @@
   <Scalar> wrap { CLAMP }
 }
 <Texture> purple-nebula-skybox_ {
-  "textures/SkyboxPurpleNebula/front5.png"
+  "FinalSkyBox/system1_front5.png"
   <Scalar> saved-result { 1 }
   <Scalar> envtype { MODULATE }
   <Scalar> minfilter { LINEAR }
@@ -52,7 +52,7 @@
   <Scalar> wrap { CLAMP }
 }
 <Texture> purple-nebula-sky {
-  "textures/SkyboxPurpleNebula/top3.png"
+  "FinalSkyBox/system1_top3.png"
   <Scalar> saved-result { 1 }
   <Scalar> envtype { MODULATE }
   <Scalar> minfilter { LINEAR }
