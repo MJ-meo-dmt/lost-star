@@ -1,283 +1,265 @@
-##########################################
-###									######
-###		THE VOID					######
-###		PROJECT : lost-star			######
-###		0x7dc 'EDEN'				######
-###									######
-##########################################
-# Start: early Oct. 2011
-
-# DEVELOPERS
-
-# 	* MJ-me0-dmt  - 1
-
-
-#-->
-
-# License
-'''
-Free BSD license 3-clause
-
-Copyright (c)<2011>, <Martin de Bruyn>
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-    - Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    - Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-    - Neither the name of the <organization> nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-'''
-
-#-->
-
-# Engine imports
-import direct.directbase.DirectStart
-# CORE
-from panda3d.core import WindowProperties
-from panda3d.core import CollisionTraverser,CollisionNode
-from panda3d.core import CollisionHandlerQueue,CollisionRay
-from panda3d.core import CollisionTube,CollisionSegment
-from panda3d.core import Filename,AmbientLight,DirectionalLight
-from panda3d.core import PandaNode,NodePath,Camera,TextNode
-from panda3d.core import Point3,Vec3,Vec4,BitMask32
-from panda3d.core import LightRampAttrib
-from panda3d.core import ColorBlendAttrib
-from panda3d.core import Filename,Buffer,Shader
-
-# TASK
-from direct.task import Task
-# PANDAC
-from pandac.PandaModules import *
-# DIRECT
-from direct.filter.CommonFilters import *
-from direct.gui.OnscreenText import OnscreenText
-from direct.actor.Actor import Actor
-from direct.showbase.DirectObject import DirectObject
-# EXTRA
-import random, sys, os, math
-
+#!/usr/bin/python
+##############################################>
+##############################################>
 ##
-# Game Imports
-#
-from db import *
+##   Free BSD license 3-clause
+##
+##   Copyright (c)<2011>, <Martin de Bruyn>
+##   All rights reserved.
+##
+##   Redistribution and use in source and binary forms, with or without
+##   modification, are permitted provided that the following conditions are met:
+##
+##      - Redistributions of source code must retain the above copyright
+##          notice, this list of conditions and the following disclaimer.
+##      - Redistributions in binary form must reproduce the above copyright
+##          notice, this list of conditions and the following disclaimer in the
+##          documentation and/or other materials provided with the distribution.
+##      - Neither the name of the <organization> nor the
+##          names of its contributors may be used to endorse or promote products
+##          derived from this software without specific prior written permission.
+##
+##   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+##   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+##   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+##   DISCLAIMED. IN NO EVENT SHALL <MARTIN DE BRUYN> BE LIABLE FOR ANY
+##   DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+##   (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+##   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+##   ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+##   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+##   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+##
+#########################################################################################>
+#########################################################################################>
+
+#  Developers.
+
+#   MJ-meo-dmt.
+
+
+####>   IMPORTS   <####
+
+# System Imports.
+import sys, os, random, math
+
+# Panda Imports.
+
+#from direct.showbase.ShowBase import ShowBase
+from pandac.PandaModules import *
+from direct.showbase.DirectObject import DirectObject
+
+# Config (game).
 from config import *
 
+# Database Import.
+from db import *
 
-###########################
-########## CODE ###########
-##########################
+####>  CODE   <####
 
+# Galaxy Class - MAIN-
+####################>
 class Galaxy(DirectObject):
     
+    # ShowBase.
     def __init__(self):
-        # Print Init.
-        print ""
-        print "#####################################"
-        print "--  GALAXY LOADED --"
-        print ""
+        #ShowBase.__init__(self)
         
-        # DB Testing
+        print "Starting Galaxy..."
+        base.setBackgroundColor(0,0,0,0)
         
-        
-        # Init skyBox. "aka spaceBox"
-        self.skyBox=loader.loadModel("../resources/models/Skybox.egg") # The Skybox need a redo.
-        self.skyBox.setScale(1.0,1.0,1.0) # Any size - No matter
+        # Load the Skybox.
+        self.skyBox = loader.loadModel("../resources/models/Skybox.egg")#("skyBoxNew.egg")#
         self.skyBox.setBin("background", 0)
+        self.skyBox.setScale(1,1,1)
         self.skyBox.setDepthTest(False)
-        self.skyBox.setCompass() # ?
         self.skyBox.setZ(render, 0)
-        print "+ Space Loaded..."
-        
-        # Attach the Skybox to the base.camera.
+        self.skyBox.clearLight()
+        self.skyBox.setCompass()
         self.skyBox.reparentTo(base.camera)
         
-        # Init Lights
-        spaceLightsInit = SpaceLights()
-        #spaceLightsInit.lightSetup()
-        self.skyBox.setLightOff()
+        print "SkyBox Loaded..."
+        ###>
         
-        # Init Planet Creation
-        self.PlanetInit = Planets()
-        self.PlanetInit.earthPlanet()
+        base.camLens.setFov(camFov)
+        base.camLens.setNear(camNear)
+        base.camLens.setFar(camFar)
         
-        #Load Space Station Data
-        #testSpaceStation = SpaceStationControl()
-
-# END OF Galaxy CLASS.
-
-
-# SpaceLights
-# Everything todo with lights in space.#
-class SpaceLights():
+        # Setup basic lights.
+        # Ambient Lights.
+        self.baseAmbientLight = AmbientLight('baseAmbientLight')
+        self.baseAmbientLight.setColor(VBase4(0.1, 0.1, 0.1, 1))
+        self.baseAmbientLightNode = render.attachNewNode(self.baseAmbientLight)
+        render.setLight(self.baseAmbientLightNode)
+        ###>
     
-    def __init__(self):
-        pass
-        # Create Light
-        #----------------------------------------------------------------------------------->
-    def lightSetup():
+        # Setup Point Light for "Star/Sun".
+        self.sunLight = PointLight('sunLight')
+        self.sunLight.setColor(VBase4(0.6, 0.6, 0.6, 1))
+        self.sunLightNode = render.attachNewNode(self.sunLight)
+        self.sunLightNode.setPos(0, 0, 0)
+        render.setLight(self.sunLightNode)
+        ###>
         
-        planetInit = Planets()
-        sun1 = planetInit.earthPlanet.sun1()
-        
-        # Setup Ambient light
-        ambientLight = AmbientLight("ambientLight")
-        ambientLight.setColor(Vec4(0.1, 0.1, 0.1, 1))
-        render.setLight(render.attachNewNode(ambientLight))
-
-        # Adding Sun light.
-        plight = PointLight('plight')
-        plight.setColor(VBase4(0.5, 0.5, 0.5, 1))
-        #plight.setAttenuation(Point3(0.9,0, 0))
-        sunLight = sun1.attachNewNode(plight)
-        self.sunLight.setPos(0,0,0)
-        render.setLight(sunLight)
+        #  LOAD SYSTEM.
+        Galaxysystem = System1()
     
+    # GALAXY END.
 
-#----------------------------------------------------------------------------------->
-
-# END OF SpaceLights CLASS
-
-# Planet control and creation.
-class Planets(SpaceLights):
+# System Class. -SUB-
+class System1():
     
     def __init__(self):
         
-        # Space scale " var " 
-        self.galaxyScale = 4 # Global var for scaling, mainly Planets, Stars...
-        self.galaxyDistance = 0.100
+        # Create System Dummy nodes.
+        self.system1Node = render.attachNewNode('system 1')
+        print self.system1Node
+        
+        # DB Instance.
+        # So we can get data from 'planetData' table.
+        DB = db()
+        self.planets(DB)
+        
+        # Galaxy Instance.
+        #initGalaxy = Galaxy()
+        #self.sunlight = initGalaxy.sunlight()
+        #render.setLight(self.sunlight)
         
         
-    def earthPlanet(self):
+    def planets(self, DB):
         
-        # INIT The dbMain Class.
-        self.DB = dbMain()
+        # Set the variables for scale and distance changes; (like global var)
+        orbitDis = 30 # This is the 30cm from the model. (From the scale pdf, ask me)
+        sunHalf = 1.5 # This is sunScale / 2 and cheated to fit in with rest of the scale/slash/Distance (needs work!)
         
-        # Use DB.getPlanetData(PID, COL)
-        # PID = planetID (sql)
-        # COL = sql_Table_Column_Name: "planetDis" (Check the config file) 
-        # And cur.close() After use
+        # Creating Dummy nodes for stars/planets.
+        self.sunNode = self.system1Node.attachNewNode('Sun')
+        self.planet1Node = self.sunNode.attachNewNode('Planet1')
+        self.planet2Node = self.sunNode.attachNewNode('Planet2')
+        self.planet3Node = self.sunNode.attachNewNode('Planet3')
+        self.planet4Node = self.sunNode.attachNewNode('Planet4')
+        self.planet5Node = self.sunNode.attachNewNode('Planet5')
+        self.planet6Node = self.sunNode.attachNewNode('Planet6')
+        self.planet7Node = self.sunNode.attachNewNode('Planet7')
+        self.planet8Node = self.sunNode.attachNewNode('Planet8')
+        self.planet9Node = self.sunNode.attachNewNode('Planet9')
         
-        planetData = self.DB.getPlanetData(3, COL2)
-        print "Got data!"
+        print self.system1Node.ls()
         
-        #####
-        ## PLANET LOAD.
-        ##
-        ##  THIS IS ONLY FOR TESTING NO SQL DATA IS EVEN BEING USED.
-        ###
+        # Get data from sql_db.
+        # Make a list to hold the 'planetData'
+        planetData = []
+        planetData = DB.getPlanetDS(planetData)
         
-        # Setting up custom materials. For the Sun atm.
-        self.mat1 = Material()
-        self.mat1.setShininess(2.0)
-        self.mat1.setDiffuse(VBase4(1,1,0,1))
-        self.mat1.setAmbient(VBase4(1,1,0,1))
-        self.mat1.setEmission(VBase4(1,1,0,1))
-        self.mat1.setSpecular(VBase4(0.8,0.6,0,1))
-        self.mat1.setTwoside(True)
-
-
-        # Setup dummynodes.
-        self.solarSystem1 = render.attachNewNode('solarSystem1')
-        self.sun1 = self.solarSystem1.attachNewNode('sun1')
-        self.planet1 = self.sun1.attachNewNode('planet1')
-        self.planet2 = self.sun1.attachNewNode('planet2')
-        self.planet3 = self.sun1.attachNewNode('planet3')
-        self.planet4 = self.sun1.attachNewNode('planet4')
-        self.planet5 = self.sun1.attachNewNode('planet5')
-        self.planet6 = self.sun1.attachNewNode('planet6')
-        self.planet7 = self.sun1.attachNewNode('planet7')
-        self.planet8 = self.sun1.attachNewNode('planet8')
-        self.planet9 = self.sun1.attachNewNode('planet9')
+        # Assign sql data to a planet'Data' var.
+        # So we can slice it for 'planetDis' and 'planetScale'
+        # planetData[0-9] = planetID from sql-db.
+        sunData = planetData[0]
+        planet1Data = planetData[1]
+        planet2Data = planetData[2]
+        planet3Data = planetData[3]
+        planet4Data = planetData[4]
+        planet5Data = planetData[5]
+        planet6Data = planetData[6]
+        planet7Data = planetData[7]
+        planet8Data = planetData[8]
+        planet9Data = planetData[9]
         
-        # Path for dummy Sphere.
+        # To use or get data:  use planet(1-9)Data[0-1].  0 = planetDistance. 1 = planetScale.
+        # print planet9Data[0]
+        # print planet9Data[1]
+        
+        # Create a var for dummySphere.
         dummySphere = "../resources/models/planet_sphere"
-
-        # Planets in order.
-        # Starting with our Star first (SUN)
         
+        # In order from 'planetID', load the planets.
+        
+        # Testing material for sun.
+        sunMat = Material()
+        sunMat.setShininess(1.0)
+        sunMat.setDiffuse(VBase4(1, 1, 0, 1))
+        sunMat.setAmbient(VBase4(1, 1, 0, 1))
+        sunMat.setEmission(VBase4(0.5, 0.5, 0, 1))
+        sunMat.setSpecular(VBase4(0.6, 0.2, 0, 1))
+        #sunMat.setTwoside(True)
+        
+        
+        # Starting with the sun.
         self.sun = loader.loadModel(dummySphere)
-        self.sun.setMaterial(self.mat1)
-        self.sun.reparentTo(self.sun1)
-        self.sun.setScale(3.0)
+        self.sun.setMaterial(sunMat)
+        self.sun.reparentTo(self.sunNode)
         self.sun.setPos(0,0,0)
+        self.sun.setScale(sunData[1])
         
+        
+        # Mercury = Planet 1.
         self.mercury = loader.loadModel(dummySphere)
-        self.mercury.reparentTo(self.planet1)
-        self.mercury.setPos((0.076*30)+ 4.712,0,0)
-        self.mercury.setScale(0.01)
-
+        self.mercury.reparentTo(self.planet1Node)
+        self.mercury.setPos((planet1Data[0] + sunHalf) * orbitDis, 0 ,0)
+        self.mercury.setScale(planet1Data[1])
+        
+        # Venus = Planet 2.
         self.venus = loader.loadModel(dummySphere)
-        self.venus.reparentTo(self.planet2)
-        self.venus.setPos((0.142*30)+ 4.712,0,0)
-        self.venus.setScale(0.026)
-
+        self.venus.reparentTo(self.planet2Node)
+        self.venus.setPos((planet2Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.venus.setScale(planet2Data[1])
+        
+        # Earth = Planet 3.
         self.earth = loader.loadModel(dummySphere)
-        self.earth.reparentTo(self.planet3)
-        self.earth.setPos((0.197*30)+4.712,0,0)
-        self.earth.setScale(0.027)
-
+        self.earth.reparentTo(self.planet3Node)
+        self.earth.setPos((planet3Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.earth.setScale(planet3Data[1])
+        print self.earth.getPos()
+        
+        # Mars = Planet 4.
         self.mars = loader.loadModel(dummySphere)
-        self.mars.reparentTo(self.planet4)
-        self.mars.setPos((0.300*30)+4.712,0,0)
-        self.mars.setScale(0.015)# 1.5cm
-
+        self.mars.reparentTo(self.planet4Node)
+        self.mars.setPos((planet4Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.mars.setScale(planet4Data[1])
+        
+        # Jupiter = Planet 5.
         self.jupiter = loader.loadModel(dummySphere)
-        self.jupiter.reparentTo(self.planet5)
-        self.jupiter.setPos((1.025*30)+4.712,0,0)
-        self.jupiter.setScale(0.300)# 
-
+        self.jupiter.reparentTo(self.planet5Node)
+        self.jupiter.setPos((planet5Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.jupiter.setScale(planet5Data[1])
+        
+        # Saturn = Planet 6.
         self.saturn = loader.loadModel(dummySphere)
-        self.saturn.reparentTo(self.planet6)
-        self.saturn.setPos((1.880*30)+4.712,0,0)
-        self.saturn.setScale(0.250)
-
+        self.saturn.reparentTo(self.planet6Node)
+        self.saturn.setPos((planet6Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.saturn.setScale(planet6Data[1])
+        
+        # Uranus = Planet 7.
         self.uranus = loader.loadModel(dummySphere)
-        self.uranus.reparentTo(self.planet7)
-        self.uranus.setPos((3.780*30)+4.712,0,0)
-        self.uranus.setScale(0.100)
-
+        self.uranus.reparentTo(self.planet7Node)
+        self.uranus.setPos((planet7Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.uranus.setScale(planet7Data[1])
+        
+        # Neptune = Planet 8.
         self.neptune = loader.loadModel(dummySphere)
-        self.neptune.reparentTo(self.planet8)
-        self.neptune.setPos((5.920*30)+4.712,0,0)
-        self.neptune.setScale(0.098)
-
+        self.neptune.reparentTo(self.planet8Node)
+        self.neptune.setPos((planet8Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.neptune.setScale(planet8Data[1])
+        
+        # Pluto = Planet 9.
         self.pluto = loader.loadModel(dummySphere)
-        self.pluto.reparentTo(self.planet9)
-        self.pluto.setPos((7.780*30)+4.712,0,0)
-        self.pluto.setScale(0.005)
-       
+        self.pluto.reparentTo(self.planet9Node)
+        self.pluto.setPos((planet9Data[0] + sunHalf) * orbitDis, 0, 0)
+        self.pluto.setScale(planet9Data[1])
+        
+        # planets END.
+        
+    # SYSTEM1 END.
     
-### END OF Planets CLASS
 
-# EVERYTHING TO DO WITH SPACE STATIONS. Here will be subclasses.
-class Station:
-    
-    def __init__(self):
-        
-        
-        # test model 
-        self.Sstasion = loader.loadModel("../resources/models/SpaceStation.egg")
-        #self.sstasion.setScale(0,0,0)
-        self.Sstasion.setPos(0.14000,0.14000,0.0010) 
-        self.Sstasion.reparentTo(render)
-# END OF SpaceStationControl CLASS.
+
+
+#--------------------------------------------------------------------->
+
+
+
+
+
 
 
 
