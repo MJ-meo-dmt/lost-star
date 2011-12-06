@@ -72,7 +72,7 @@ camFar = 1000000
 
 ## VIDEO SETTINGS  ##
 useAutoShader = True
-useBloom = True
+useBloom = False
 useCartoonInk = False
 useAntialias = False
 useAnalyze = True

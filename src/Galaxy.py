@@ -69,11 +69,11 @@ class Galaxy(DirectObject):
         
         # Load the Skybox.
         self.skyBox = loader.loadModel("../resources/models/GenericSkybox.egg")#
-        self.skyBox.setBin("background", 0)
+        self.skyBox.setBin("background", 1)
         self.skyBox.setScale(1,1,1)
         self.skyBox.setDepthTest(False)
         self.skyBox.setZ(render, 0)
-        self.skyBox.clearLight()
+        self.skyBox.setShaderOff()
         self.skyBox.setLightOff()
         self.skyBox.setCompass()
         self.skyBox.reparentTo(base.camera)
