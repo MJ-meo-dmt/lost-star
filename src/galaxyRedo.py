@@ -211,6 +211,7 @@ galaxy = PlanetSystem("System 1")
 
 ### Instance planets ###
 # theplanet = Planet(name, planetType="rock") \\ Have to figure out how to make use of setPos within class... Noob :P
+# Check the planet types...
 # Sun
 sun = Planet("Sun", "Gas")
 galaxy.addPlanet("Sun", sun)
