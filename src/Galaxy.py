@@ -122,11 +122,7 @@ class System1():
         
         
     def planets(self, DB):
-        
-        # Set the variables for scale and distance changes; (like global var)
-        orbitDis = 30 # This is the 30cm from the model. (From the scale pdf, ask me)
-        sunHalf = 1.5 # This is sunScale / 2 and cheated to fit in with rest of the scale/slash/Distance (needs work!)
-        
+    
         # Creating Dummy nodes for stars/planets.
         self.sunNode = self.system1Node.attachNewNode('Sun')
         self.planet1Node = self.sunNode.attachNewNode('Planet1')
@@ -247,6 +243,59 @@ class System1():
     # SYSTEM1 END.
     
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Random Thoughts...
+
+# I should surly hate myself for the fact that I can't see time...?!
+# It's just a matter of time they say, or so atleast we hope...?
+# Stand out make something for yourself embrace the good and deflect the bad...?
+# All sure what exactly is the meaning of bad then...? or good;
+# even so we tend to say what we think is good, just to feel bad....
 
 
 #--------------------------------------------------------------------->

@@ -68,7 +68,7 @@ import Player
 
 # LOAD PRC.
 if (useConfigPrc == True):
-    loadPrcFile(confPrc)
+    loadPrcFile(CONFIG_PRC)
     print "+ CONFIG LOADED +"
     print ""
     

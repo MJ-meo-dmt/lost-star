@@ -45,27 +45,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
 #-->
-
+import random, sys, os, math
 # Engine imports
 import direct.directbase.DirectStart
 # CORE
 from panda3d.core import WindowProperties
-from panda3d.core import Filename
 from panda3d.core import PandaNode, NodePath, Camera, TextNode
-from panda3d.core import Point3, Vec3, Vec4, BitMask32
-from panda3d.core import ColorBlendAttrib
-from panda3d.core import Filename, Buffer, Shader
-# TASK
-from direct.task import Task
-# PANDAC
-from pandac.PandaModules import *
-# DIRECT
+
+
 from direct.gui.OnscreenText import OnscreenText
 from direct.showbase.DirectObject import DirectObject
 from direct.interval.IntervalGlobal import *
 from direct.gui.DirectGui import *
-# EXTRA
-import random, sys, os, math
+
+
 
 ##
 # Game Imports

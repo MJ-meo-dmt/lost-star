@@ -52,10 +52,13 @@ print "Loading Main Config..."
 ### PATHS ###
 
 # Config.prc path.
-confPrc = "../config/Config.prc"
+CONFIG_PRC = "../config/Config.prc"
 
 # Database config.
-dbPath = "db/gameData.db"
+DB_PATH = "db/gameData.db"
+
+# Skybox path.
+SKYBOX_PATH = "../resources/models/GenericSkybox.egg"
 ####>
 
 
@@ -89,6 +92,11 @@ col3 = 'planetPosX'
 col4 = 'planetPosY'
 col5 = 'planetPosZ'
 ###>
+
+## SCALE VARIABLES ##
+# Set the variables for scale and distance changes; (like global var)
+ORBIT_DIS = 30 # This is the 30cm from the model. (From the scale pdf, ask me)
+SUN_HALF = 1.5 # This is sunScale / 2 and cheated to fit in with rest of the scale/slash/Distance (needs work!)
 print "Main Config Loaded >>>"
 
 

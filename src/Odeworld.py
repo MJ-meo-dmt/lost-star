@@ -86,7 +86,7 @@ stepSize = 1.0 / 90.0
 def simulationTask(task):
     global deltaTimeAccumulator
     
-    myBody.setForce(0, min(task.time**2 * 2 - 2, 0), 0)
+    myBody.setForce(1, min(task.time**2 * 800000 - 800000, 0), 0)
     deltaTimeAccumulator += globalClock.getDt()
     while deltaTimeAccumulator > stepSize:
         deltaTimeAccumulator -= stepSize
