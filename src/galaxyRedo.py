@@ -65,8 +65,6 @@ base = ShowBase()   # FOR testing!! remove if done!
 ##############################
 #     PATHS
 ##############################
-# If skybox changes.. we can change it in config.
-pathBox = skyboxPath
 # Create a var for dummySphere.
 dummySphere = "../resources/models/planet_sphere"
 
@@ -144,31 +142,53 @@ class PlanetSystem:
         # Lets name the system.
         self.systemName = systemName
         
+        # Empty place for stars. like the 'Sun'
+        self.stars = {}
+        
         # Empty Dict. for planets.
         self.planets = {}
         
-        # Empty Dict. for the moons.
+        # Empty Dict. for the moons. for the many :P
         self.moons = {}
         
-    # Method for adding planets to the Dict.
+        # Empty Dict. for dwarf stars.
+        self.dwarf = {}
+        
+    # Methods for adding planets to the Dict.
+    def addStars(self, starsName, starsInstance):
+        self.stars[starsName] = starsInstance
+    
     def addPlanet(self, planetName, planetInstance):
         self.planets[planetName] = planetInstance
-    
+        
+    def addDwarf(self, dwarfName, dwarfInstance):
+        self.dwarf[dwarfName] = dwarfInstance
+        
     # Method for adding moons.
-    def addMoon(self, moonName, moonInstance):
+    def addMoons(self, moonsName, moonsInstance):
         self.moons[moonName] = moonInstance
 ###> PlanetSystem Class END.
 
 
-# This class creates new planets.
-class Planet():
-    def __init__(self, name, planetType="rock"):
+# Creating planets. Feed the data to make planets... :)
+class Planet:
+    def __init__(self, name, modelPath, planetNode, planetPos, planetScale, planetType="Terrestrial"):
         # Add a name to the planet
         self.name = name
-        # Add a type to the planet.
+        
+        # Add a model to the planet.
+        self.np = loader.loadModel(modelPath)
+        
+        # Render it, set it, size it... 
+        self.np.reparentTo(planetNode)
+        self.np.setPos(planetPos)
+        self.np.setScale(planetScale)
+        
+        # Give it a type, "Terrestrial" = "rock, metal" other "Jovian" = "hydrogen, helium"
         self.planetType = planetType
-        print "Planet: %s with Type: %s - Created..." % (name, planetType)
 
+        # Print out Confirm.
+        print "Planet: %s with Type: %s - Created..." % (name, planetType)
 ###> Planet Class END.
 
 
@@ -189,7 +209,7 @@ class Moon:
 # Setup basic lights.
 # Ambient Lights.
 baseAmbientLight = AmbientLight('AmbientLight')
-baseAmbientLight.setColor(VBase4(0, 0, 0, 1))
+baseAmbientLight.setColor(VBase4(0.1, 0.1, 0.1, 1))
 baseAmbientLightNode = render.attachNewNode(baseAmbientLight)
 render.setLight(baseAmbientLightNode)
 ###>
@@ -200,7 +220,6 @@ sunLight.setColor(VBase4(3, 3, 3, 1))
 #sunLight.setSpecularColor(VBase4(1, 1, 1, 1))
 sunLightNode = galaxyNode.attachNewNode(sunLight)
 sunLightNode.setPos(0, 0, 0)
-sunLightNode.setScale(10)
 render.setLight(sunLightNode)
 ###>
 
@@ -212,105 +231,39 @@ galaxy = PlanetSystem("System 1")
 ### Instance planets ###
 # theplanet = Planet(name, planetType="rock") \\ Have to figure out how to make use of setPos within class... Noob :P
 # Check the planet types...
-# Sun
-sun = Planet("Sun", "Gas")
-galaxy.addPlanet("Sun", sun)
+
+# Sun (star).
+sun = Planet("Sun", dummySphere, sunNode, sunData[0], sunData[1], "Star")
+galaxy.addStars("Sun", sun)
 # Mercury
-mercury = Planet("Mercury")
+mercury = Planet("Mercury", dummySphere, mercuryNode, mercuryData[0], mercuryData[1])
 galaxy.addPlanet("Mercury", mercury)
 # Venus
-venus = Planet("Venus")
+venus = Planet("Venus", dummySphere, venusNode, venusData[0], venusData[1])
 galaxy.addPlanet("Venus", venus)
 # Earth
-earth = Planet("Earth", "Ice")
+earth = Planet("Earth", dummySphere, earthNode, earthData[0], earthData[1])
 galaxy.addPlanet("Earth", earth)
 # Mars
-mars = Planet("Mars", "Desert")
+mars = Planet("Mars", dummySphere, marsNode, marsData[0], marsData[1])
 galaxy.addPlanet("Mars", mars)
 # Jupiter
-jupiter = Planet("Jupiter", "Gas")
+jupiter = Planet("Jupiter", dummySphere, jupiterNode, jupiterData[0], jupiterData[1], "Jovian")
 galaxy.addPlanet("Jupiter", jupiter)
 # Saturn
-saturn = Planet("Saturn")
+saturn = Planet("Saturn", dummySphere, saturnNode, saturnData[0], saturnData[1], "Jovian")
 galaxy.addPlanet("Saturn", saturn)
 # Uranus
-uranus = Planet("Uranus")
+uranus = Planet("Uranus", dummySphere, uranusNode, uranusData[0], uranusData[1], "Jovian")
 galaxy.addPlanet("Uranus", uranus)
 # Neptune
-neptune = Planet("Neptune", "Water")
+neptune = Planet("Neptune", dummySphere, neptuneNode, neptuneData[0], neptuneData[1], "Jovian")
 galaxy.addPlanet("Neptune", neptune)
 # Pluto
-pluto = Planet("Pluto", "Ice")
+pluto = Planet("Pluto", dummySphere, plutoNode, plutoData[0], plutoData[1], "Dwarf Planet")
 galaxy.addPlanet("Pluto", pluto)
 
 ###> Instance END
-
-##################################
-#    SETUP PLANET LOC, SCALE...
-##################################
-# Testing material for sun.
-sunMat = Material()
-sunMat.setShininess(3.0)
-sunMat.setDiffuse(VBase4(254, 157, 58, 1))
-sunMat.setAmbient(VBase4(254, 157, 58, 1))
-sunMat.setEmission(VBase4(0.6, 0.6, 0, 1))
-sunMat.setSpecular(VBase4(254, 157, 58, 1))
-#sunMat.setTwoside(True)
-
-
-### SETUP PLANETS ###
-
-# Starting with the sun.
-galaxy.planets['Sun'] = loader.loadModel(dummySphere)
-galaxy.planets['Sun'].reparentTo(sunNode)
-galaxy.planets['Sun'].setMaterial(sunMat)
-galaxy.planets['Sun'].setPos(0, 0, 0)
-galaxy.planets['Sun'].setScale(sunData[1])
-
-galaxy.planets['Mercury'] = loader.loadModel(dummySphere)
-galaxy.planets['Mercury'].reparentTo(mercuryNode)
-galaxy.planets['Mercury'].setPos(1, 0, 0)
-galaxy.planets['Mercury'].setScale(mercuryData[1])
-
-galaxy.planets['Venus'] = loader.loadModel(dummySphere)
-galaxy.planets['Venus'].reparentTo(venusNode)
-galaxy.planets['Venus'].setPos(2, 0, 0)
-galaxy.planets['Venus'].setScale(venusData[1])
-
-galaxy.planets['Earth'] = loader.loadModel(dummySphere)
-galaxy.planets['Earth'].reparentTo(earthNode)
-galaxy.planets['Earth'].setPos(3, 0, 0)
-galaxy.planets['Earth'].setScale(earthData[1])
-
-galaxy.planets['Mars'] = loader.loadModel(dummySphere)
-galaxy.planets['Mars'].reparentTo(marsNode)
-galaxy.planets['Mars'].setPos(4, 0, 0)
-galaxy.planets['Mars'].setScale(marsData[1])
-
-galaxy.planets['Jupiter'] = loader.loadModel(dummySphere)
-galaxy.planets['Jupiter'].reparentTo(jupiterNode)
-galaxy.planets['Jupiter'].setPos(5, 0, 0)
-galaxy.planets['Jupiter'].setScale(jupiterData[1])
-
-galaxy.planets['Saturn'] = loader.loadModel(dummySphere)
-galaxy.planets['Saturn'].reparentTo(saturnNode)
-galaxy.planets['Saturn'].setPos(6, 0, 0)
-galaxy.planets['Saturn'].setScale(saturnData[1])
-
-galaxy.planets['Uranus'] = loader.loadModel(dummySphere)
-galaxy.planets['Uranus'].reparentTo(uranusNode)
-galaxy.planets['Uranus'].setPos(7, 0, 0)
-galaxy.planets['Uranus'].setScale(uranusData[1])
-
-galaxy.planets['Neptune'] = loader.loadModel(dummySphere)
-galaxy.planets['Neptune'].reparentTo(neptuneNode)
-galaxy.planets['Neptune'].setPos(8, 0, 0)
-galaxy.planets['Neptune'].setScale(neptuneData[1])
-
-galaxy.planets['Pluto'] = loader.loadModel(dummySphere)
-galaxy.planets['Pluto'].reparentTo(plutoNode)
-galaxy.planets['Pluto'].setPos(9, 0, 0)
-galaxy.planets['Pluto'].setScale(plutoData[1])
 
 print render.ls()
 run()

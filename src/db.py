@@ -83,7 +83,7 @@ class db:
         and 'planetScale' from the whole 'planetData' Table!. 
         """
         # Set the connection to the db.
-        self.conn = sqlite.connect(dbPath)
+        self.conn = sqlite.connect(DB_PATH)
          
         # Set the Cursor for This connection.
         self.cur = self.conn.cursor()
@@ -110,7 +110,7 @@ class db:
         !Needs work!
         """        
         # Set the connection to the db.
-        self.conn = sqlite.connect(dbPath)
+        self.conn = sqlite.connect(DB_PATH)
         
         # Setup cursor for the Connection.
         self.cur = self.conn.cursor()
